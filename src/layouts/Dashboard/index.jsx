@@ -61,7 +61,6 @@ class Dashboard extends Component {
           })}
           isSidebarOpen={isOpen}
           onToggleSidebar={this.handleToggleOpen}
-          title={title}
         />
 
         <Sidebar
@@ -79,10 +78,11 @@ class Dashboard extends Component {
         >
           <div className={classes.breadcrumb}>
             <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="Breadcrumb">
-              <Link color="inherit" href="/" onClick={this.handleClick}>
+              {/* <Link color="inherit" href="/" onClick={this.handleClick}>
                 Dashboard
-            </Link>
-              <Typography className={classes.breadcrumbText} color="textPrimary">Dashboard</Typography>
+            </Link> */}
+              <Typography color="textPrimary">Dashboard</Typography>
+              <Typography className={classes.breadcrumbText} color="textPrimary">{title}</Typography>
             </Breadcrumbs>
           </div>
           <div className={classes.content}>

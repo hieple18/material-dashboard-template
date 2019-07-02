@@ -34,12 +34,12 @@ const styles = theme => ({
   }
 });
 
-class Dashboard extends Component {
+class Monitor extends Component {
   render() {
     const { classes } = this.props;
 
     return (
-      <DashboardLayout title="Dashboard">
+      <DashboardLayout title="Monitor">
         <div className={classes.root}>
 
           <Grid
@@ -125,8 +125,8 @@ class Dashboard extends Component {
   }
 }
 
-Dashboard.propTypes = {
+Monitor.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Dashboard);
+export default withStyles(styles)(Monitor);

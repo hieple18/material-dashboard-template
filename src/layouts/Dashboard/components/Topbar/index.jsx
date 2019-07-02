@@ -111,7 +111,6 @@ class Topbar extends Component {
     const {
       classes,
       className,
-      title,
       isSidebarOpen,
       onToggleSidebar
     } = this.props;
@@ -138,7 +137,7 @@ class Topbar extends Component {
               className={classes.title}
               variant="h4"
             >
-              {title}
+              Dashboard
             </Typography>
 
             <div className={classes.leftButtons}>

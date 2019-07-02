@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 // Views
-import Dashboard from './views/Dashboard';
+import Monitor from './views/Monitor';
 import ProductList from './views/ProductList';
 import UserList from './views/UserList';
 import Typography from './views/Typography';
@@ -21,12 +21,12 @@ export default class Routes extends Component {
         <Redirect
           exact
           from="/"
-          to="/dashboard"
+          to="/monitor"
         />
         <Route
-          component={Dashboard}
+          component={Monitor}
           exact
-          path="/dashboard"
+          path="/monitor"
         />
         <Route
           component={UserList}

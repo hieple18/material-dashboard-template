@@ -51,8 +51,8 @@ class Sidebar extends Component {
 
     const navMenu = [
       {
-        to: '/dashboard',
-        name: 'Dashboard',
+        to: '/monitor',
+        name: 'Monitor',
         icon: <DashboardIcon />
       },
       {
@@ -135,7 +135,6 @@ class Sidebar extends Component {
           <Divider className={classes.listDivider} />
           <List component="div"
             disablePadding>
-
           </List>
         </div>
       </Drawer>
