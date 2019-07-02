@@ -43,28 +43,40 @@ export default theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: theme.spacing(5) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(7) + 1,
-    },
+    width: theme.spacing(9)
+    // width: theme.spacing(5) + 1,
+    // [theme.breakpoints.up('sm')]: {
+    //   width: theme.spacing(7) + 1,
+    // },
   },
   sidebar: {
     width: `calc( ${DRAWER_WIDTH}px - 1px)`
   },
-  logoWrapper: {
+  toolbar: {
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'flex-end',
+    ...theme.mixins.toolbar,
     height: '63px',
-    flexShrink: 0
+    padding: '0 8px',
+    borderBottom: `1px solid #DFE3E8`,
+  },
+  logoWrapper: {
+    // display: 'flex',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // flexShrink: 0,
+
   },
   logoLink: {
     fontSize: 0
   },
   logoImage: {
-    cursor: 'pointer'
+    cursor: 'pointer',
+    maxWidth: '100%',
+    padding: '50px',
   },
-  logoDivider: {
+  divider: {
     marginBottom: theme.spacing.unit * 2
   },
   profile: {
@@ -92,11 +104,11 @@ export default theme => ({
     cursor: 'pointer',
     '&:hover': {
       backgroundColor: theme.palette.primary.light,
-      borderLeft: `${MENU_LIST_ITEM_BORDER_WIDTH}px solid ${theme.palette.primary.main}`,
+      // borderLeft: `${MENU_LIST_ITEM_BORDER_WIDTH}px solid ${theme.palette.primary.main}`,
       // borderRadius: `${MENU_LIST_ITEM_BORDER_WIDTH}px`,
       '& $listItemIcon': {
         color: theme.palette.primary.main,
-        marginLeft: `-${MENU_LIST_ITEM_BORDER_WIDTH}px`
+        // marginLeft: `-${MENU_LIST_ITEM_BORDER_WIDTH}px`
       }
     },
     '& + &': {
@@ -106,7 +118,7 @@ export default theme => ({
   activeListItem: {
     borderLeft: `${MENU_LIST_ITEM_BORDER_WIDTH}px solid ${theme.palette.primary.main}`,
     // borderRadius: `${MENU_LIST_ITEM_BORDER_WIDTH}px`,
-    backgroundColor: theme.palette.primary.light,
+    // backgroundColor: theme.palette.primary.light,
     '& $listItemText': {
       color: theme.palette.text.primary
     },
@@ -116,7 +128,8 @@ export default theme => ({
     }
   },
   listItemIcon: {
-    marginRight: 0
+    marginRight: 0,
+    padding: '10px'
   },
   listItemText: {
     fontWeight: MENU_LIST_ITEM_FONT_WEIGHT,
@@ -125,5 +138,8 @@ export default theme => ({
   listDivider: {
     marginBottom: theme.spacing.unit * 2,
     marginTop: theme.spacing.unit * 2
+  }, 
+  hidden: {
+    display: 'none'
   }
 });

@@ -19,7 +19,7 @@
 
 ## Quick start
 
-- [Download from Github]() or clone the repo: `git clone `
+- [Download from Github](https://github.com/naeminhye/material-dashboard-template) or clone the repo: `git clone https://github.com/naeminhye/material-dashboard-template.git`
 
 - Install dependencies: `npm install` or `yarn`
 

@@ -23,9 +23,7 @@ import {
 // Material icons
 import {
   Menu as MenuIcon,
-  Close as CloseIcon,
   NotificationsOutlined as NotificationsIcon,
-  Input as InputIcon,
   Person as PersonIcon,
   Search as SearchIcon
 } from '@material-ui/icons';
@@ -128,11 +126,13 @@ class Topbar extends Component {
         <div className={rootClassName}>
           <Toolbar className={classes.toolbar}>
             <IconButton
-              className={classes.menuButton}
+              className={classNames(classes.menuButton, {
+                [classes.hidden]: isSidebarOpen,
+              })}
               onClick={onToggleSidebar}
               variant="text"
             >
-              {isSidebarOpen ? <CloseIcon /> : <MenuIcon />}
+              <MenuIcon />
             </IconButton>
             <Typography
               className={classes.title}
@@ -164,12 +164,6 @@ class Topbar extends Component {
               >
                 <PersonIcon />
               </IconButton>
-              {/* <IconButton
-              className={classes.signOutButton}
-              onClick={this.handleSignOut}
-            >
-              <InputIcon />
-            </IconButton> */}
             </div>
 
           </Toolbar>
@@ -193,19 +187,18 @@ class Topbar extends Component {
             onSelect={this.handleCloseNotifications}
           />
         </Popover>
-
         <Popover
           anchorEl={profileEl}
           anchorOrigin={{
             vertical: 'bottom',
-            horizontal: 'center'
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
           }}
           onClose={this.handleCloseProfile}
           open={showProfile}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center'
-          }}
         >
           <div>
             <Avatar

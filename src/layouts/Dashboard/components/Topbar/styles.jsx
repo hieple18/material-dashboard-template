@@ -1,10 +1,11 @@
+const TOP_HEIGHT = 64;
 export default theme => ({
   root: {
     borderBottom: `1px solid ${theme.palette.border}`,
     backgroundColor: theme.palette.common.white,
     display: 'flex',
     alignItems: 'center',
-    height: '64px',
+    height: TOP_HEIGHT,
     zIndex: theme.zIndex.appBar
   },
   toolbar: {
@@ -25,5 +26,8 @@ export default theme => ({
   },
   signOutButton: {
     marginLeft: theme.spacing.unit
+  },
+  hidden: {
+    display: 'none'
   }
 });

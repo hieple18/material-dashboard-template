@@ -1,4 +1,5 @@
 const DRAWER_WIDTH = 271;
+const SMALL_DRAWER_WIDTH = 71;
 const TOP_HEIGHT = 64;
 export default theme => ({
   topbar: {
@@ -28,20 +29,31 @@ export default theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  content: {
+  viewContainer: {
     flexGrow: 1,
-    padding: theme.spacing(3),
     marginTop: TOP_HEIGHT,
+    paddingTop: theme.spacing(4),
     backgroundColor: theme.palette.background.default,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     })
   },
+  breadcrumb: {
+    marginLeft: theme.spacing(6),
+    marginRight: theme.spacing(6),
+  },
+  breadcrumbText: {
+    fontWeight: 500
+  },
+  content: {
+    padding: theme.spacing(2),
+    paddingTop: 0,
+  },
   contentShift: {
     marginLeft: `calc( ${DRAWER_WIDTH}px - 1px)`
   },
   narrowContent: {
-    marginLeft: '30px'
-  }
+    marginLeft: SMALL_DRAWER_WIDTH
+  },
 });
