@@ -25,7 +25,8 @@ import {
   Menu as MenuIcon,
   NotificationsOutlined as NotificationsIcon,
   Person as PersonIcon,
-  Search as SearchIcon
+  Search as SearchIcon,
+  ExpandMoreOutlined as ExpandIcon
 } from '@material-ui/icons';
 
 // Shared services
@@ -141,12 +142,12 @@ class Topbar extends Component {
             </Typography>
 
             <div className={classes.leftButtons}>
+
               <IconButton
               >
                 <SearchIcon />
               </IconButton>
               <IconButton
-                // className={classes.notificationsButton}
                 onClick={this.handleShowNotifications}
               >
                 <Badge
@@ -157,12 +158,21 @@ class Topbar extends Component {
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
-              <IconButton
-                className={classes.signOutButton}
-                onClick={this.handleShowProfile}
-              >
-                <PersonIcon />
-              </IconButton>
+
+              <Button size="small"
+                className={classes.profile}
+                onClick={this.handleShowProfile}>
+                <Avatar
+                  className={classes.avatar}
+                  src="/images/avatars/avatar_1.png"
+                />
+                <span>
+                  Nguyễn Minh Híu
+                </span>
+
+                <ExpandIcon />
+
+              </Button>
             </div>
 
           </Toolbar>

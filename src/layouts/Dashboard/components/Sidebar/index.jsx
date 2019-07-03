@@ -37,9 +37,6 @@ import {
   Close as CloseIcon,
 } from '@material-ui/icons';
 
-// // CLSX utility for constructing `className` 
-// import clsx from 'clsx';
-
 // Component styles
 import styles from './styles';
 

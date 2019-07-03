@@ -16,6 +16,7 @@
 
 - [Brainalytica - Material React Dashboard Free](https://devias.io/products/material-react-dashboard)
 - [React Material UI](https://material-ui.com/)
+- [RSUITE](https://rsuitejs.com/en/)
 
 ## Quick start
 

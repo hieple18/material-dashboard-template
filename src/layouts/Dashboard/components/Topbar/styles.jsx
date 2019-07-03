@@ -29,5 +29,11 @@ export default theme => ({
   },
   hidden: {
     display: 'none'
+  },
+  avatar: {
+    margin: '10px'
+  },
+  profileButton: {
+    textTranform: 'none'
   }
 });
