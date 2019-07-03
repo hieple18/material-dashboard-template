@@ -103,12 +103,12 @@ class UserList extends Component {
     const { selectedUsers } = this.state;
 
     return (
-      <DashboardLayout title="Users">
+      // <DashboardLayout title="Users">
         <div className={classes.root}>
           <UsersToolbar selectedUsers={selectedUsers} />
           <div className={classes.content}>{this.renderUsers()}</div>
         </div>
-      </DashboardLayout>
+      // </DashboardLayout>
     );
   }
 }

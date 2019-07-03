@@ -21,7 +21,7 @@ import {
   SalesChart,
   DevicesChart,
   ProductList,
-  OrdersTable
+  OrdersTable,
 } from './components';
 
 // Component styles
@@ -39,9 +39,8 @@ class Monitor extends Component {
     const { classes } = this.props;
 
     return (
-      <DashboardLayout title="Monitor">
+      // <DashboardLayout title="Monitor">
         <div className={classes.root}>
-
           <Grid
             container
             spacing={4}
@@ -120,7 +119,7 @@ class Monitor extends Component {
             </Grid>
           </Grid>
         </div>
-      </DashboardLayout>
+      // </DashboardLayout>
     );
   }
 }

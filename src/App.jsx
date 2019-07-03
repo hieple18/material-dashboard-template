@@ -21,6 +21,9 @@ import './assets/scss/index.scss';
 // Routes
 import Routes from './Routes';
 
+// Shared layouts
+import { Dashboard as DashboardLayout } from 'layouts';
+
 // Browser history
 const browserHistory = createBrowserHistory();
 
@@ -34,7 +37,9 @@ export default class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <Router history={browserHistory}>
-          <Routes />
+          <DashboardLayout>
+            <Routes />
+          </DashboardLayout>
         </Router>
       </ThemeProvider>
     );

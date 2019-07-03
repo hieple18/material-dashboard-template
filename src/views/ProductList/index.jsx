@@ -124,7 +124,7 @@ class ProductList extends Component {
     const { classes } = this.props;
 
     return (
-      <DashboardLayout title="Products">
+      // <DashboardLayout title="Products">
         <div className={classes.root}>
           <ProductsToolbar />
           <div className={classes.content}>{this.renderProducts()}</div>
@@ -138,7 +138,7 @@ class ProductList extends Component {
             </IconButton>
           </div>
         </div>
-      </DashboardLayout>
+      // </DashboardLayout>
     );
   }
 }

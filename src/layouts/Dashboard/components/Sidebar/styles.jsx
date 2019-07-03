@@ -115,10 +115,28 @@ export default theme => ({
       // marginTop: theme.spacing.unit
     }
   },
+  listSubItem: {
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: theme.palette.primary.light,
+      '& $listItemIcon': {
+        color: theme.palette.primary.main,
+        marginLeft: `-${MENU_LIST_ITEM_BORDER_WIDTH}px`
+      }
+    },
+  },
   activeListItem: {
     borderLeft: `${MENU_LIST_ITEM_BORDER_WIDTH}px solid ${theme.palette.primary.main}`,
-    // borderRadius: `${MENU_LIST_ITEM_BORDER_WIDTH}px`,
-    // backgroundColor: theme.palette.primary.light,
+    '& $listItemText': {
+      color: theme.palette.text.primary
+    },
+    '& $listItemIcon': {
+      color: theme.palette.primary.main,
+      marginLeft: `-${MENU_LIST_ITEM_BORDER_WIDTH}px`
+    }
+  },
+  activeListSubItem: {
+    // borderRight: `${MENU_LIST_ITEM_BORDER_WIDTH}px solid ${theme.palette.primary.main}`,
     '& $listItemText': {
       color: theme.palette.text.primary
     },
