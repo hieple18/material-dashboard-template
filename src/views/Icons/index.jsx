@@ -12,7 +12,7 @@ import { Dashboard as DashboardLayout } from 'layouts';
 // Component styles
 const styles = theme => ({
   root: {
-    padding: theme.spacing.unit * 4
+    padding: theme.spacing(4)
   },
   iframe: {
     width: '100%',
@@ -26,7 +26,6 @@ class Icons extends Component {
     const { classes } = this.props;
 
     return (
-      <DashboardLayout title="Icons">
         <div className={classes.root}>
           <iframe
             className={classes.iframe}
@@ -34,7 +33,6 @@ class Icons extends Component {
             title="Material Design icons"
           />
         </div>
-      </DashboardLayout>
     );
   }
 }

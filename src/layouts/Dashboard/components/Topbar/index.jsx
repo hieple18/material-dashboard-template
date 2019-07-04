@@ -17,7 +17,13 @@ import {
   Toolbar,
   Avatar,
   Typography,
-  Button
+  Button,
+  ClickAwayListener,
+  Paper,
+  List,
+  ListItem, 
+  ListItemIcon,
+  ListItemText
 } from '@material-ui/core';
 
 // Material icons
@@ -26,7 +32,8 @@ import {
   NotificationsOutlined as NotificationsIcon,
   Person as PersonIcon,
   Search as SearchIcon,
-  ExpandMoreOutlined as ExpandIcon
+  ExpandMoreOutlined as ExpandIcon,
+  StarBorderOutlined as StartIcon
 } from '@material-ui/icons';
 
 // Shared services
@@ -38,6 +45,8 @@ import { NotificationList } from './components';
 // Component styles
 import styles from './styles';
 
+import { Dropdown } from 'rsuite';
+
 class Topbar extends Component {
   signal = true;
 
@@ -46,7 +55,8 @@ class Topbar extends Component {
     notificationsLimit: 4,
     notificationsCount: 0,
     notificationsEl: null,
-    profileEl: null
+    profileEl: null,
+    dropdownOpen: false
   };
 
   async getNotifications() {
@@ -108,14 +118,22 @@ class Topbar extends Component {
     })
   }
 
+  handleClickDropDown = () => {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
+  };
+
+  handleClickAway = () => {
+    this.setState({
+      dropdownOpen: false
+    });
+  };
+
+
   render() {
-    const {
-      classes,
-      className,
-      isSidebarOpen,
-      onToggleSidebar
-    } = this.props;
-    const { notifications, notificationsCount, notificationsEl, profileEl } = this.state;
+    const { classes, className, isSidebarOpen, onToggleSidebar, isMobile } = this.props;
+    const { notifications, notificationsCount, notificationsEl, profileEl, dropdownOpen, } = this.state;
 
     const rootClassName = classNames(classes.root, className);
     const showNotifications = Boolean(notificationsEl);
@@ -141,39 +159,64 @@ class Topbar extends Component {
               Dashboard
             </Typography>
 
-            <div className={classes.leftButtons}>
-
-              <IconButton
-              >
-                <SearchIcon />
-              </IconButton>
-              <IconButton
-                onClick={this.handleShowNotifications}
-              >
-                <Badge
-                  badgeContent={notificationsCount}
-                  color="primary"
-                  variant="dot"
+            {isMobile ?
+              <div className={classes.dropdownContainer}>
+                {/* <ClickAwayListener onClickAway={this.handleClickAway}>
+                  <div>
+                    <Button onClick={this.handleClickDropDown}>Open menu</Button>
+                    {dropdownOpen ? (
+                      <Paper className={classes.dropdown}>
+                        <List component="div" disablePadding>
+                          <ListItem button>
+                            <ListItemIcon>
+                              <StartIcon />
+                            </ListItemIcon>
+                          </ListItem>
+                        </List>
+                      </Paper>
+                    ) : null}
+                  </div>
+                </ClickAwayListener> */}
+              </div>
+              :
+              <div className={classes.leftButtons}>
+                <IconButton
                 >
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
+                  <SearchIcon />
+                </IconButton>
+                <IconButton
+                  onClick={this.handleShowNotifications}
+                >
+                  <Badge
+                    badgeContent={notificationsCount}
+                    color="primary"
+                    variant="dot"
+                  >
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton
+                >
+                  <PersonIcon />
+                </IconButton>
 
-              <Button size="small"
-                className={classes.profile}
-                onClick={this.handleShowProfile}>
-                <Avatar
-                  className={classes.avatar}
-                  src="/images/avatars/avatar_1.png"
-                />
-                <span>
-                  Nguyễn Minh Híu
-                </span>
+                {/* <Button size="small"
+                  className={classes.profile}
+                  onClick={this.handleShowProfile}>
+                  <Avatar
+                    className={classes.avatar}
+                    src="/images/avatars/avatar_1.png"
+                  />
+                  <span>
+                    Nguyễn Minh Híu
+  </span>
 
-                <ExpandIcon />
+                  <ExpandIcon />
 
-              </Button>
-            </div>
+                </Button> */}
+              </div>}
+
+
 
           </Toolbar>
         </div>

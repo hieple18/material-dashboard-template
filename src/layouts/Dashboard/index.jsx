@@ -8,6 +8,10 @@ import classNames from 'classnames';
 import compose from 'recompose/compose';
 import PropTypes from 'prop-types';
 
+import { withRouter } from "react-router";
+
+import { toUpperCaseFirstLetter } from 'common/utils'
+
 // Material helpers
 import { withStyles, withWidth, Breadcrumbs, Link, Typography } from '@material-ui/core';
 
@@ -25,10 +29,11 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
 
-    const isMobile = ['xs', 'sm'].includes(props.width);
+    const isMobile = ['xs'].includes(props.width);
+    const isTablet = ['sm'].includes(props.width);
 
     this.state = {
-      isOpen: !isMobile
+      isOpen: !isMobile && !isTablet    
     };
   }
 
@@ -48,17 +53,19 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { classes, width, title, children } = this.props;
+    const { classes, width, title, children, match } = this.props;
     const { isOpen } = this.state;
 
-    const isMobile = ['xs', 'sm'].includes(width);
-
+    const isMobile = ['xs'].includes(width);
+    const isTablet = ['sm'].includes(width);
+    
     return (
       <Fragment>
         <Topbar
           className={classNames(classes.topbar, {
-            [classes.topbarShift]: isOpen && !isMobile,
+            [classes.topbarShift]: isOpen && !isMobile && !isTablet,
           })}
+          isMobile={isMobile}
           isSidebarOpen={isOpen}
           onToggleSidebar={this.handleToggleOpen}
         />
@@ -67,13 +74,13 @@ class Dashboard extends Component {
           anchor="left"
           onClose={this.handleClose}
           open={isOpen}
-          isMobile={isMobile}
+          isHidden={(isMobile || isTablet)}
           onToggleSidebar={this.handleToggleOpen} />
 
         <main
           className={classNames(classes.viewContainer, {
-            [classes.contentShift]: isOpen && !isMobile,
-            [classes.narrowContent]: !isOpen && !isMobile
+            [classes.contentShift]: isOpen && !isMobile && !isTablet,
+            [classes.narrowContent]: !isOpen && !isMobile && !isTablet
           })}
         >
           <div className={classes.breadcrumb}>
@@ -82,7 +89,7 @@ class Dashboard extends Component {
                 Dashboard
             </Link> */}
               <Typography color="textPrimary">Dashboard</Typography>
-              <Typography className={classes.breadcrumbText} color="textPrimary">{title}</Typography>
+              <Typography className={classes.breadcrumbText} color="textPrimary">{match.params.view}</Typography>
             </Breadcrumbs>
           </div>
           <div className={classes.content}>
@@ -106,4 +113,4 @@ Dashboard.propTypes = {
 export default compose(
   withStyles(styles),
   withWidth()
-)(Dashboard);
+)(withRouter(Dashboard));

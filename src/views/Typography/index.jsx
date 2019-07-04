@@ -15,7 +15,7 @@ import { Dashboard as DashboardLayout } from 'layouts';
 // Component styles
 const styles = theme => ({
   root: {
-    padding: theme.spacing.unit * 4
+    padding: theme.spacing(4)
   }
 });
 
@@ -41,7 +41,6 @@ class Typography extends Component {
     const { classes } = this.props;
 
     return (
-      <DashboardLayout title="Typography">
         <div className={classes.root}>
           <Grid
             container
@@ -71,7 +70,6 @@ class Typography extends Component {
             ))}
           </Grid>
         </div>
-      </DashboardLayout>
     );
   }
 }

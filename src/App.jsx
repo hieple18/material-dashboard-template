@@ -19,10 +19,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import './assets/scss/index.scss';
 
 // Routes
-import Routes from './Routes';
-
-// Shared layouts
-import { Dashboard as DashboardLayout } from 'layouts';
+import { MainRoutes } from './routes';
 
 // Browser history
 const browserHistory = createBrowserHistory();
@@ -37,9 +34,11 @@ export default class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <Router history={browserHistory}>
-          <DashboardLayout>
+          {/* <DashboardLayout>
             <Routes />
-          </DashboardLayout>
+          </DashboardLayout> */}
+          <MainRoutes />
+          {/* <DashboardPage /> */}
         </Router>
       </ThemeProvider>
     );

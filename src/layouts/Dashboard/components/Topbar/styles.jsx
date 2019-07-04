@@ -1,3 +1,5 @@
+import { relative } from "path";
+
 const TOP_HEIGHT = 64;
 export default theme => ({
   root: {
@@ -13,7 +15,7 @@ export default theme => ({
     width: '100%'
   },
   title: {
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing(1)
   },
   menuButton: {
     marginLeft: '-4px'
@@ -25,7 +27,7 @@ export default theme => ({
     marginLeft: 'auto'
   },
   signOutButton: {
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing(1)
   },
   hidden: {
     display: 'none'
@@ -35,5 +37,15 @@ export default theme => ({
   },
   profileButton: {
     textTranform: 'none'
+  },
+  dropdownContainer: {
+    position: 'relative',
+    marginLeft: 'auto'
+  },
+  dropdown: {
+    position: 'absolute',
+    top: 36,
+    right: 0,
+    left: 0,
   }
 });

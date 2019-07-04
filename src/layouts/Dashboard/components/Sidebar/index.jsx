@@ -36,6 +36,7 @@ import {
   AccountBoxOutlined as AccountBoxIcon,
   SettingsOutlined as SettingsIcon,
   Close as CloseIcon,
+  HomeOutlined as HomeIcon
 } from '@material-ui/icons';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -48,7 +49,7 @@ const navMenu = [
   {
     id: '1',
     name: 'Monitor',
-    to: '/monitor',
+    to: '/dashboard/monitor',
     icon: <DashboardIcon />,
     // subitems: [
     //   {
@@ -60,16 +61,46 @@ const navMenu = [
   },
   {
     id: '2',
-    to: '/users',
+    to: '/dashboard/users',
     name: 'Users',
     icon: <PeopleIcon />
 
   },
   {
     id: '3',
-    to: '/products',
+    to: '/dashboard/products',
     name: 'Products',
     icon: <ShoppingBasketIcon />
+  },
+  {
+    id: '4',
+    to: '/dashboard/typography',
+    name: 'Typography',
+    icon: <TextFieldsIcon />
+  },
+  {
+    id: '5',
+    to: '/dashboard/icons',
+    name: 'Icons',
+    icon: <ImageIcon />
+  },
+  {
+    id: '6',
+    to: '/dashboard/account',
+    name: 'Account',
+    icon: <AccountBoxIcon />
+  },
+  {
+    id: '7',
+    to: '/dashboard/settings',
+    name: 'Settings',
+    icon: <SettingsIcon />
+  },
+  {
+    id: '8',
+    to: '/dashboard/underDevelopment',
+    name: 'UnderDevelopment',
+    icon: <InfoIcon />
   }
 ]
 
@@ -162,7 +193,7 @@ class NestedList extends Component {
 
 class Sidebar extends Component {
   render() {
-    const { classes, className, onClose, open, anchor, isMobile, onToggleSidebar } = this.props;
+    const { classes, className, onClose, open, anchor, isHidden, onToggleSidebar } = this.props;
 
     // const rootClassName = classNames(classes.root, className);
 
@@ -181,14 +212,14 @@ class Sidebar extends Component {
         }}
         onClose={onClose}
         open={open}
-        variant={isMobile ? 'temporary' : 'permanent'}
+        variant={isHidden ? 'temporary' : 'permanent'}
       >
         <div className={classes.sidebar}>
           <div className={classes.toolbar}>
             <div className={classes.logoWrapper}>
               <Link
                 className={classes.logoLink}
-                to="/"
+                to="/dashboard/monitor"
               >
                 <img
                   alt="Logo"
@@ -210,29 +241,37 @@ class Sidebar extends Component {
           </div>
 
           <NestedList data={navMenu} classes={classes} open={open} />
-          {/* <List
-            component="div"
-            disablePadding
-          >
-            {navMenu && navMenu.map((menu, index) => (<ListItem
-              activeClassName={classes.activeListItem}
-              className={classes.listItem}
-              component={NavLink}
-              to={menu.to}
-            >
-              <ListItemIcon className={classes.listItemIcon}>
-                {menu.icon}
-              </ListItemIcon>
-              {open ? <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary={menu.name}
-              /> : null}
-            </ListItem>)
-            )}
-          </List> */}
           <Divider className={classes.listDivider} />
           <List component="div"
             disablePadding>
+              <ListItem
+              activeClassName={classes.activeListItem}
+              className={classes.listItem}
+              component={NavLink}
+              to="/dashboard/about"
+            >
+              <ListItemIcon className={classes.listItemIcon}>
+                <InfoIcon />
+              </ListItemIcon>
+              {open ? <ListItemText
+                classes={{ primary: classes.listItemText }}
+                primary="About"
+              /> : null}
+            </ListItem>
+              <ListItem
+              activeClassName={classes.activeListItem}
+              className={classes.listItem}
+              component={NavLink}
+              to="/home"
+            >
+              <ListItemIcon className={classes.listItemIcon}>
+                <HomeIcon />
+              </ListItemIcon>
+              {open ? <ListItemText
+                classes={{ primary: classes.listItemText }}
+                primary="Home"
+              /> : null}
+            </ListItem>
           </List>
         </div>
       </Drawer>
