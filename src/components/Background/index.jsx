@@ -29,57 +29,56 @@ const renderShapes = (shapeType, count, width, height) => {
     for (let index = 0; index < count; index++) {
         const scale = Math.random() * 6;
         let shape;
-        switch(shapeType) {
+        switch (shapeType) {
             case 'circle':
-
-                    shape = <Circle
-                        x={Math.random() * width}
-                        y={Math.random() * height}
-                        d={50 * scale}
-                        c={pastelGenerator()} />
+                shape = <Circle
+                    x={((Math.random() * (width - 2 * (50 * scale)) * 100) / (width - (50 * scale))) + '%'}
+                    y={((Math.random() * (height - 2 * (50 * scale)) * 100) / (height - (50 * scale))) + '%'}
+                    d={50 * scale}
+                    c={pastelGenerator()} />
                 //         shape = <circle key={index} cx={Math.random() * width}
                 // cy={Math.random() * height} 
                 // r={50 * scale}
                 // fill={ pastelGenerator()} />
                 break;
-            // case ' rect':
-            //     shape = <Rect
-            //     x={Math.random() * width}
-            //     y={Math.random() * height}
-            //     width={50}
-            //     height={50}
-            //     scale={{
-            //         x: scale,
-            //         y: scale
-            //     }} 
-            //     fill={ pastelGenerator()}
-            //   />
-            //     break;
-            // case 'star':
-            //     shape = <Star
-            //     x={Math.random() * width}
-            //     y={Math.random() * height}
-            //     numPoints={5}
-            //     innerRadius={30}
-            //     outerRadius={50}
-            //     fill={ pastelGenerator()}
-            //     opacity={0.8}
-            //     draggable={true}
-            //     scale={{
-            //         x: scale,
-            //         y: scale
-            //     }}
-            //     rotation={Math.random() * 180}
-            // //               shadowColor='black'
-            // //               shadowBlur={10}
-            // //               shadowOffset={{
-            // //                 x : 5,
-            // //                 y : 5
-            // //               }}
-            // //               shadowOpacity={0.6}
-            // //               // custom attribute
-            // //               startScale={scale}
-            // />
+                // case ' rect':
+                //     shape = <Rect
+                //     x={Math.random() * width}
+                //     y={Math.random() * height}
+                //     width={50}
+                //     height={50}
+                //     scale={{
+                //         x: scale,
+                //         y: scale
+                //     }} 
+                //     fill={ pastelGenerator()}
+                //   />
+                //     break;
+                // case 'star':
+                //     shape = <Star
+                //     x={Math.random() * width}
+                //     y={Math.random() * height}
+                //     numPoints={5}
+                //     innerRadius={30}
+                //     outerRadius={50}
+                //     fill={ pastelGenerator()}
+                //     opacity={0.8}
+                //     draggable={true}
+                //     scale={{
+                //         x: scale,
+                //         y: scale
+                //     }}
+                //     rotation={Math.random() * 180}
+                // //               shadowColor='black'
+                // //               shadowBlur={10}
+                // //               shadowOffset={{
+                // //                 x : 5,
+                // //                 y : 5
+                // //               }}
+                // //               shadowOpacity={0.6}
+                // //               // custom attribute
+                // //               startScale={scale}
+                // />
                 break;
         }
         background.push(shape);
@@ -96,7 +95,7 @@ const Background = props => {
         <div
             className={rootClassName}
             style={style}>
-            {renderShapes(shape, count, width, height)}
+            {/* {renderShapes(shape, count, width, height)} */}
             <div className={classes.foreground}>
                 {children}
             </div>

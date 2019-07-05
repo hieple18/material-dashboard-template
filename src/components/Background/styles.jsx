@@ -1,16 +1,14 @@
 export default theme => ({
-    root: {
-      backgroundColor: theme.palette.common.white,
-      
-    },
-    foreground: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        position: 'absolute', left: '50%', top: '50%',
-        transform: 'translate(-50%, -50%)',
-        minWidth: '80%',
-        minHeight: '70%',
-    }
+  root: {
+    // backgroundColor: theme.palette.background.default,
+    overflow: 'hidden'
+  },
+  foreground: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    minWidth: '100%',
+    minHeight: '100%',
+    backgroundColor: '#E05376',
+  }
 });
-  

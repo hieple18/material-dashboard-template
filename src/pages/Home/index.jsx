@@ -8,7 +8,9 @@ import {
     Paper,
     Typography,
     Grid,
-    Button
+    Button,
+    Fab,
+    ButtonGroup
 } from '@material-ui/core';
 
 // Material helpers
@@ -18,35 +20,50 @@ import { Link } from 'react-router-dom';
 
 // Component styles
 import styles from './styles';
-import image from 'assets/images/home-foreground.jpg'; 
 
 class Home extends Component {
     render() {
         const { classes, className, ...rest } = this.props;
 
         return (
-            <div>
-                <Background width={window.innerWidth} height={window.innerHeight}>
-                    <Paper className={classes.root}>
-                        <Grid container>
-                            <Grid item xs={8} className={classes.leftContainer}>
-                                <Typography variant="h1" component="h1">
-                                    Trời mưa bong bóng phập phồng
+            <Background width={window.innerWidth} height={window.innerHeight}>
+                <Paper className={classes.root}>
+                    <Grid container spacing={1}>
+                        <Grid item xs={12} className={classes.menuBar}>
+                            <div className={classes.menu}>
+                                <Button size="large" className={classes.menuButton}>
+                                    Docs
+                                    </Button>
+                                <Button size="large" className={classes.menuButton}>
+                                    About
+                                    </Button>
+                                <ButtonGroup size="large" aria-label="Outlined button group">
+                                    <Button>
+                                        Sign Up
+                                    </Button>
+                                    <Button className={classes.filledBg}>
+                                        Log In
+                                    </Button>
+                                </ButtonGroup>
+                            </div>
+                        </Grid>
+                        <Grid item xs={12} className={classes.leftContainer}>
+                            <Typography className={classes.bigText} component="p">
+                                Spaceship
                             </Typography>
-                                <Typography component="p">
-                                    Paper can be used to build surface or other elements for your application.
+                            <Typography className={classes.mediumText} component="p">
+                                Invest Your Super in the Future
                             </Typography>
                             <Link to="/dashboard">
                                 <Button color="primary" variant="dashboard" aria-label="Dashboard" className={classes.fab}>
-                                        Go to Dashboard
-                                </Button>
+                                    Go to Dashboard
+                                    </Button>
                             </Link>
 
-                            </Grid>
                         </Grid>
-                    </Paper>
-                </Background>
-            </div>
+                    </Grid>
+                </Paper>
+            </Background>
         );
     }
 }

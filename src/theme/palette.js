@@ -49,10 +49,12 @@ export default {
     disabled: '#A6B1BB'
   },
   background: {
-    default: '#f8fafc',
+    default: '#EDF3F8',//'#f8fafc',
     dark: '#172B4D',
     paper: white
   },
   border: '#DFE3E8',
   divider: '#DFE3E8'
 };
+
+// header #F4F8F9
