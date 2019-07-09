@@ -33,6 +33,7 @@
     "history": "^4.7.2",
     "konva": "^3.3.3",
     "moment": "^2.24.0",
+    "mui-datatables": "^2.6.1",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.1",
     "react": "^16.8.6",

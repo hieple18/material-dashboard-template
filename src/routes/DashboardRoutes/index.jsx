@@ -11,6 +11,7 @@ import {
   Account,
   Settings,
   UnderDevelopment,
+  Tables
 } from 'views';
 
 export default class DashboardRoutes extends Component {
@@ -61,6 +62,11 @@ export default class DashboardRoutes extends Component {
           component={UnderDevelopment}
           exact
           path="/dashboard/under-development"
+        />
+        <Route
+          component={Tables}
+          exact
+          path="/dashboard/tables"
         />
       </Switch>
     );

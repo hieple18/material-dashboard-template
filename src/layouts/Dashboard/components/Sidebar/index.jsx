@@ -36,7 +36,8 @@ import {
   AccountBoxOutlined as AccountBoxIcon,
   SettingsOutlined as SettingsIcon,
   Close as CloseIcon,
-  HomeOutlined as HomeIcon
+  HomeOutlined as HomeIcon,
+  TableChart as TableIcon
 } from '@material-ui/icons';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -98,9 +99,15 @@ const navMenu = [
   },
   {
     id: '8',
-    to: '/dashboard/underDevelopment',
+    to: '/dashboard/under-development',
     name: 'UnderDevelopment',
     icon: <InfoIcon />
+  },
+  {
+    id: '9',
+    to: '/dashboard/tables',
+    name: 'Tables',
+    icon: <TableIcon />
   }
 ]
 

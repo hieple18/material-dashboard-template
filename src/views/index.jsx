@@ -6,3 +6,4 @@ export { default as Typography } from './Typography';
 export { default as Icons } from './Icons';
 export { default as Settings } from './Settings';
 export { default as UnderDevelopment } from './UnderDevelopment';
+export { default as Tables } from './Tables';
