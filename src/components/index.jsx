@@ -11,3 +11,6 @@ export { default as Status } from './Status';
 export { default as Tabs } from './Tabs';
 export { default as Table } from './Table';
 export { default as Background } from './Background';
+export { default as ChipInput } from './ChipInput';
+export { default as DigitalInput } from './DigitalInput';
+export { default as TextField } from './TextField';

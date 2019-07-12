@@ -171,7 +171,8 @@ CustomTable.defaultProps = {
     columns: [],
     options: {
         filterType: "dropdown",
-        responsive: "scroll"
+        responsive: "scroll",
+        print: false
     }
 };
 

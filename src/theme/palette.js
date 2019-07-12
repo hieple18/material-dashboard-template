@@ -54,7 +54,16 @@ export default {
     paper: white
   },
   border: '#DFE3E8',
-  divider: '#DFE3E8'
+  divider: '#DFE3E8',
+  minimal: {
+    main: '#D8C3A4',
+    beige: '#D8C3A4',
+    shadow: '#EC8076',
+    secondary: '#E85A50',
+    primary: '#0E0E0E'
+  }
 };
 
 // header #F4F8F9
+//theme.palette.minimal.main for background
+// theme.palette.minimal.beige

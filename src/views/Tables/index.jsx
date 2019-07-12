@@ -72,8 +72,9 @@ class Tables extends Component {
     ];
 
     const options = {
-          filterType: "dropdown",
-          responsive: "scroll"
+      filterType: "dropdown",
+      responsive: "scroll",
+      print: false
     };
 
     return (

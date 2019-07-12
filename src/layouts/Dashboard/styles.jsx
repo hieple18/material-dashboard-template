@@ -47,8 +47,7 @@ export default theme => ({
     fontWeight: 500
   },
   content: {
-    padding: theme.spacing(2),
-    paddingTop: 0,
+    padding: theme.spacing(0, 2),
   },
   contentShift: {
     marginLeft: `calc( ${DRAWER_WIDTH}px - 1px)`

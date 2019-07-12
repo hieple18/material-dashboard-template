@@ -29,19 +29,18 @@ import {
   DashboardOutlined as DashboardIcon,
   PeopleOutlined as PeopleIcon,
   ShoppingBasketOutlined as ShoppingBasketIcon,
-  LockOpenOutlined as LockOpenIcon,
   TextFields as TextFieldsIcon,
-  ImageOutlined as ImageIcon,
   InfoOutlined as InfoIcon,
   AccountBoxOutlined as AccountBoxIcon,
   SettingsOutlined as SettingsIcon,
   Close as CloseIcon,
   HomeOutlined as HomeIcon,
-  TableChart as TableIcon
+  TableChart as TableIcon,
+  EditOutlined as EditIcon,
+  MapOutlined as MapIcon
 } from '@material-ui/icons';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
 
 // Component styles
 import styles from './styles';
@@ -51,14 +50,7 @@ const navMenu = [
     id: '1',
     name: 'Monitor',
     to: '/dashboard/monitor',
-    icon: <DashboardIcon />,
-    // subitems: [
-    //   {
-    //     id: '1A',
-    //     name: 'AAA',
-    //     to: '/monitor',
-    //   }
-    // ]
+    icon: <DashboardIcon />
   },
   {
     id: '2',
@@ -81,9 +73,9 @@ const navMenu = [
   },
   {
     id: '5',
-    to: '/dashboard/icons',
-    name: 'Icons',
-    icon: <ImageIcon />
+    to: '/dashboard/tables',
+    name: 'Tables',
+    icon: <TableIcon />
   },
   {
     id: '6',
@@ -105,9 +97,21 @@ const navMenu = [
   },
   {
     id: '9',
-    to: '/dashboard/tables',
-    name: 'Tables',
-    icon: <TableIcon />
+    to: '/dashboard/form',
+    name: 'Form',
+    icon: <EditIcon />
+  },
+  {
+    id: '10',
+    to: '/dashboard/map',
+    name: 'Map',
+    icon: <MapIcon />
+  },
+  {
+    id: '11',
+    to: '/dashboard/blank',
+    name: 'Blank',
+    icon: <HomeIcon />
   }
 ]
 
