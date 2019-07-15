@@ -43,6 +43,7 @@
     "react-dom": "^16.8.6",
     "react-konva": "^16.8.7-3",
     "react-perfect-scrollbar": "^1.4.4",
+    "react-rater": "^5.1.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
     "react-use-form-state": "^0.10.4",
