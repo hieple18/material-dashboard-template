@@ -11,6 +11,10 @@ import {
   Account,
   Settings,
   UnderDevelopment,
+  Tables, 
+  Form,
+  Blank,
+  Map
 } from 'views';
 
 export default class DashboardRoutes extends Component {
@@ -43,11 +47,6 @@ export default class DashboardRoutes extends Component {
           path="/dashboard/typography"
         />
         <Route
-          component={Icons}
-          exact
-          path="/dashboard/icons"
-        />
-        <Route
           component={Account}
           exact
           path="/dashboard/account"
@@ -61,6 +60,26 @@ export default class DashboardRoutes extends Component {
           component={UnderDevelopment}
           exact
           path="/dashboard/under-development"
+        />
+        <Route
+          component={Tables}
+          exact
+          path="/dashboard/tables"
+        />
+        <Route
+          component={Form}
+          exact
+          path="/dashboard/form"
+        />
+        <Route
+          component={Blank}
+          exact
+          path="/dashboard/blank"
+        />
+        <Route
+          component={Map}
+          exact
+          path="/dashboard/map"
         />
       </Switch>
     );

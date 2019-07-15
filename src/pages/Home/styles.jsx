@@ -5,16 +5,22 @@ export default theme => ({
     flex: 1,
     backgroundColor: theme.palette.common.white,
     boxShadow: '10px 10px 47px 13px rgba(0,0,0,0.1)',
-    borderRadius: '5px',
     padding: theme.spacing(3),
+    backgroundImage: `url(${image})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+  },
+  floatingPage: { 
     position: 'absolute', 
     left: '50%', top: '50%',
     transform: 'translate(-50%, -50%)',
     minHeight: '70%',
     minWidth: '70%',
-    backgroundImage: `url(${image})`,
-    backgroundPosition: 'center',
-    backgroundSize: 'cover'
+    // borderRadius: '5px',
+  },
+  fullPage: {
+    width:'100%',
+    height: '100%'
   },
   leftContainer: {
     padding: theme.spacing(3, 2),

@@ -21,7 +21,7 @@ import {
   ClickAwayListener,
   Paper,
   List,
-  ListItem, 
+  ListItem,
   ListItemIcon,
   ListItemText
 } from '@material-ui/core';
@@ -152,12 +152,9 @@ class Topbar extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography
-              className={classes.title}
-              variant="h4"
-            >
-              Dashboard
-            </Typography>
+
+            {/* TODO: search box */}
+            {/* TODO: if isMobile --> leftButtons responsive */}
 
             {isMobile ?
               <div className={classes.dropdownContainer}>

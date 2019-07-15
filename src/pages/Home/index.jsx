@@ -18,16 +18,24 @@ import { withStyles } from '@material-ui/core';
 
 import { Link } from 'react-router-dom';
 
+import classNames from 'classnames';
+
 // Component styles
 import styles from './styles';
 
 class Home extends Component {
+
     render() {
         const { classes, className, ...rest } = this.props;
 
+        const isMobile = ['xs', 'sm'].includes(this.props.width);
+
         return (
             <Background width={window.innerWidth} height={window.innerHeight}>
-                <Paper className={classes.root}>
+                <Paper className={classNames(classes.root, 
+                    { [classes.floatingPage]: !isMobile, 
+                        // [classes.fullPage]: isMobile
+                    })}>
                     <Grid container spacing={1}>
                         <Grid item xs={12} className={classes.menuBar}>
                             <div className={classes.menu}>
