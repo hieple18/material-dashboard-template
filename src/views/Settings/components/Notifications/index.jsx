@@ -31,8 +31,7 @@ class Notifications extends Component {
     return (
       <Portlet
         {...rest}
-        className={rootClassName}
-      >
+        className={rootClassName}>
         <PortletHeader>
           <PortletLabel
             subtitle="Manage the notifications"
@@ -119,8 +118,7 @@ class Notifications extends Component {
         <PortletFooter className={classes.portletFooter}>
           <Button
             color="primary"
-            variant="outlined"
-          >
+            variant="outlined">
             Save
           </Button>
         </PortletFooter>

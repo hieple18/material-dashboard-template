@@ -9,14 +9,29 @@ import compose from 'recompose/compose';
 import PropTypes from 'prop-types';
 
 import { withRouter } from "react-router";
-
-import { toUpperCaseFirstLetter } from 'common/utils'
+import { withTranslation } from 'react-i18next';
 
 // Material helpers
-import { withStyles, withWidth, Breadcrumbs, Link, Typography } from '@material-ui/core';
+import {
+  withStyles,
+  withWidth,
+  Breadcrumbs,
+  Link,
+  Typography,
+} from '@material-ui/core';
+
+import SpeedDial from '@material-ui/lab/SpeedDial';
+import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
+import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 
 import {
-  NavigateNext as NavigateNextIcon
+  FileCopyOutlined as FileCopyIcon,
+  Save as SaveIcon,
+  Print as PrintIcon,
+  Share as ShareIcon,
+  Delete as DeleteIcon,
+  NavigateNext as NavigateNextIcon,
+  LanguageOutlined as LanguageIcon
 } from '@material-ui/icons';
 
 // Custom components
@@ -33,9 +48,41 @@ class Dashboard extends Component {
     const isTablet = ['sm'].includes(props.width);
 
     this.state = {
-      isOpen: !isMobile && !isTablet    
+      isOpen: !isMobile && !isTablet,
+      direction: 'up',
+      open: false,
+      hidden: isMobile,
     };
   }
+
+  handleSpeedDialClick = () => {
+    this.setState(state => ({
+      open: !state.open,
+    }));
+  };
+
+  handleSpeedDialDirectionChange = (event, value) => {
+    this.setState({
+      direction: value,
+    });
+  };
+
+  handleSpeedDialHiddenChange = (event, hidden) => {
+    this.setState(state => ({
+      hidden,
+      // hidden implies !open
+      open: hidden ? false : state.open,
+    }));
+  };
+
+  handleSpeedDialClose = () => {
+    this.setState({ open: false });
+  };
+
+  handleSpeedDialOpen = () => {
+    this.setState({ open: true });
+  };
+
 
   handleClose = () => {
     this.setState({ isOpen: false });
@@ -53,51 +100,79 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { classes, width, title, children, match } = this.props;
+    const { classes, width, title, children, match, t } = this.props;
     const { isOpen } = this.state;
 
     const isMobile = ['xs'].includes(width);
     const isTablet = ['sm'].includes(width);
-    
+    const actions = [
+      { icon: <PrintIcon />, name: 'Print' },
+      { icon: <ShareIcon />, name: 'Share' },
+      { icon: <LanguageIcon />, name: 'Language'}
+    ];
+    const { direction, hidden, open } = this.state;
+
     return (
-      <Fragment>
-        <Topbar
-          className={classNames(classes.topbar, {
-            [classes.topbarShift]: isOpen && !isMobile && !isTablet,
-          })}
-          isMobile={isMobile}
-          isSidebarOpen={isOpen}
-          onToggleSidebar={this.handleToggleOpen}
-        />
+      <div className={classes.wrapper}>
+        <Fragment>
+          <Topbar
+            className={classNames(classes.topbar, {
+              [classes.topbarShift]: isOpen && !isMobile && !isTablet,
+            })}
+            isMobile={isMobile}
+            isSidebarOpen={isOpen}
+            onToggleSidebar={this.handleToggleOpen}
+          />
 
-        <Sidebar
-          anchor="left"
-          onClose={this.handleClose}
-          open={isOpen}
-          isHidden={(isMobile || isTablet)}
-          onToggleSidebar={this.handleToggleOpen} />
+          <Sidebar
+            anchor="left"
+            onClose={this.handleClose}
+            open={isOpen}
+            isHidden={(isMobile || isTablet)}
+            onToggleSidebar={this.handleToggleOpen} />
 
-        <main
-          className={classNames(classes.viewContainer, {
-            [classes.contentShift]: isOpen && !isMobile && !isTablet,
-            [classes.narrowContent]: !isOpen && !isMobile && !isTablet
-          })}
+          <main
+            className={classNames(classes.viewContainer, {
+              [classes.contentShift]: isOpen && !isMobile && !isTablet,
+              [classes.narrowContent]: !isOpen && !isMobile && !isTablet
+            })}
+          >
+            <div className={classes.breadcrumb}>
+              <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="Breadcrumb">
+                <Typography color="textPrimary">{t('dashboard')}</Typography>
+                <Typography className={classes.breadcrumbText} color="textPrimary">{t(match.params.view)}</Typography>
+              </Breadcrumbs>
+            </div>
+            <div className={classes.content}>
+              {children}
+            </div>
+            <Footer />
+          </main>
+        </Fragment>
+        <SpeedDial
+          ariaLabel="SpeedDial example"
+          className={classes.speedDial}
+          hidden={isMobile}
+          icon={<SpeedDialIcon />}
+          onBlur={this.handleSpeedDialClose}
+          onClick={this.handleSpeedDialClick}
+          onClose={this.handleSpeedDialClose}
+          onFocus={this.handleSpeedDialOpen}
+          onMouseEnter={this.handleSpeedDialOpen}
+          onMouseLeave={this.handleSpeedDialClose}
+          open={open}
+          direction={direction}
         >
-          <div className={classes.breadcrumb}>
-            <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="Breadcrumb">
-              {/* <Link color="inherit" href="/" onClick={this.handleClick}>
-                Dashboard
-            </Link> */}
-              <Typography color="textPrimary">Dashboard</Typography>
-              <Typography className={classes.breadcrumbText} color="textPrimary">{match.params.view}</Typography>
-            </Breadcrumbs>
-          </div>
-          <div className={classes.content}>
-            {children}
-          </div>
-          <Footer />
-        </main>
-      </Fragment>
+          {actions.map(action => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              onClick={this.handleSpeedDialClick}
+            />
+          ))}
+        </SpeedDial>
+      </div>
     );
   }
 }
@@ -113,4 +188,4 @@ Dashboard.propTypes = {
 export default compose(
   withStyles(styles),
   withWidth()
-)(withRouter(Dashboard));
+)(withRouter(withTranslation('default')(Dashboard)));

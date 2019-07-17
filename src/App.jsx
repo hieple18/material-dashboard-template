@@ -34,11 +34,7 @@ export default class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <Router history={browserHistory}>
-          {/* <DashboardLayout>
-            <Routes />
-          </DashboardLayout> */}
           <MainRoutes />
-          {/* <DashboardPage /> */}
         </Router>
       </ThemeProvider>
     );

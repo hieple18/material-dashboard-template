@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 // Material helpers
 import { withStyles } from '@material-ui/core';
+import { withTranslation } from "react-i18next";
 
 // Material components
 import {
@@ -122,12 +123,13 @@ class NestedList extends Component {
   };
 
   render() {
-    const { classes, open, data } = this.props;
+    const { classes, open, data, t } = this.props;
 
     return (
       <List
         component="div"
         disablePadding
+        className={classes.marginTopList}
       >
         {data && data.map((item) => {
           return (
@@ -143,7 +145,7 @@ class NestedList extends Component {
                   </ListItemIcon>
                   {open ? <ListItemText
                     classes={{ primary: classes.listItemText }}
-                    primary={item.name}
+                    primary={t(item.name.toLowerCase())}
                   /> : null}
                 </ListItem> :
                 <div key={item.id}>
@@ -204,7 +206,7 @@ class NestedList extends Component {
 
 class Sidebar extends Component {
   render() {
-    const { classes, className, onClose, open, anchor, isHidden, onToggleSidebar } = this.props;
+    const { classes, className, onClose, open, anchor, isHidden, onToggleSidebar, ...rest } = this.props;
 
     // const rootClassName = classNames(classes.root, className);
 
@@ -226,18 +228,20 @@ class Sidebar extends Component {
         variant={isHidden ? 'temporary' : 'permanent'}
       >
         <div className={classes.sidebar}>
-          <div className={classes.toolbar}>
-            <div className={classes.logoWrapper}>
-              <Link
-                className={classes.logoLink}
-                to="/dashboard/monitor"
-              >
-                <img
-                  alt="Logo"
-                  className={classes.logoImage}
-                  src={logo}
-                />
-              </Link>
+          <div className={classes.fixedToolbar}>
+            <div className={classes.toolbar}>
+              <div className={classes.logoWrapper}>
+                <Link
+                  className={classes.logoLink}
+                  to="/dashboard/monitor"
+                >
+                  <img
+                    alt="Logo"
+                    className={classes.logoImage}
+                    src={logo}
+                  />
+                </Link>
+              </div>
             </div>
 
             <IconButton
@@ -251,11 +255,13 @@ class Sidebar extends Component {
             </IconButton>
           </div>
 
-          <NestedList data={navMenu} classes={classes} open={open} />
+{/* TODO: scroll only in this list */}
+          <NestedList data={navMenu} classes={classes} open={open} {...rest} />
+
           <Divider className={classes.listDivider} />
           <List component="div"
             disablePadding>
-              <ListItem
+            <ListItem
               activeClassName={classes.activeListItem}
               className={classes.listItem}
               component={NavLink}
@@ -281,4 +287,4 @@ Sidebar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Sidebar);
+export default withStyles(styles)(withTranslation('default')(Sidebar));

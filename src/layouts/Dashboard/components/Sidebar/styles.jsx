@@ -50,7 +50,17 @@ export default theme => ({
     // },
   },
   sidebar: {
-    width: `calc( ${DRAWER_WIDTH}px - 1px)`
+    width: `calc( ${DRAWER_WIDTH}px - 1px)`,
+    overflowY: 'hidden'
+  },
+  fixedToolbar: {
+    
+    top: 0,
+    left: 0,
+    // right: 'auto',
+    width: 'inherit',
+    position: 'fixed',
+    display: 'flex',
   },
   toolbar: {
     display: 'flex',
@@ -96,6 +106,10 @@ export default theme => ({
   profileDivider: {
     marginBottom: theme.spacing(2),
     marginTop: theme.spacing(2)
+  },
+  marginTopList: {
+    marginTop: theme.spacing(8),
+    overflowY: 'scroll'
   },
   listSubheader: {
     color: theme.palette.text.secondary

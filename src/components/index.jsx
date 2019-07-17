@@ -14,3 +14,5 @@ export { default as Background } from './Background';
 export { default as ChipInput } from './ChipInput';
 export { default as DigitalInput } from './DigitalInput';
 export { default as TextField } from './TextField';
+export { default as CustomInput } from './CustomInput';
+

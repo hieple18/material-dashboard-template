@@ -4,6 +4,9 @@ import Rater from 'react-rater'
 import 'react-rater/lib/react-rater.css'
 import { Typography } from '@material-ui/core';
 
+// Externals
+import PropTypes from 'prop-types';
+
 class CustomRater extends Component {
     constructor(props) {
         super(props);
@@ -30,6 +33,15 @@ class CustomRater extends Component {
             </div>
         );
     }
+}
+
+CustomRater.propTypes = {
+    children: PropTypes.node,
+    onRate: PropTypes.func
+}
+
+CustomRater.defaultProps = {
+    children: null,
 }
 
 export default CustomRater;

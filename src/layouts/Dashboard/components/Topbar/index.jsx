@@ -8,22 +8,27 @@ import PropTypes from 'prop-types';
 
 // Material helpers
 import { withStyles } from '@material-ui/core';
+import { withTranslation } from "react-i18next";
 
 // Material components
 import {
   Badge,
   IconButton,
   Popover,
+  Popper,
   Toolbar,
   Avatar,
   Typography,
   Button,
   ClickAwayListener,
   Paper,
+  Grow,
   List,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  MenuItem,
+  MenuList
 } from '@material-ui/core';
 
 // Material icons
@@ -33,7 +38,8 @@ import {
   Person as PersonIcon,
   Search as SearchIcon,
   ExpandMoreOutlined as ExpandIcon,
-  StarBorderOutlined as StartIcon
+  StarBorderOutlined as StartIcon,
+  LanguageOutlined as LanguageIcon
 } from '@material-ui/icons';
 
 // Shared services
@@ -45,8 +51,6 @@ import { NotificationList } from './components';
 // Component styles
 import styles from './styles';
 
-import { Dropdown } from 'rsuite';
-
 class Topbar extends Component {
   signal = true;
 
@@ -56,7 +60,9 @@ class Topbar extends Component {
     notificationsCount: 0,
     notificationsEl: null,
     profileEl: null,
-    dropdownOpen: false
+    langEl: null,
+    dropdownOpen: false,
+    lang: 'en'
   };
 
   async getNotifications() {
@@ -81,6 +87,7 @@ class Topbar extends Component {
   componentDidMount() {
     this.signal = true;
     this.getNotifications();
+
   }
 
   componentWillUnmount() {
@@ -117,6 +124,17 @@ class Topbar extends Component {
       profileEl: null
     })
   }
+  handleShowLanguage = event => {
+    this.setState({
+      langEl: event.currentTarget
+    });
+  };
+
+  handleCloseLanguage = () => {
+    this.setState({
+      langEl: null,
+    });
+  };
 
   handleClickDropDown = () => {
     this.setState({
@@ -130,14 +148,22 @@ class Topbar extends Component {
     });
   };
 
+  handleChangeLanguage = (lang) => {
+    this.handleCloseLanguage();
+    if (lang !== this.state.lang) {
+      this.props.i18n.changeLanguage(lang);
+      this.setState({ lang })
+    }
+  }
 
   render() {
-    const { classes, className, isSidebarOpen, onToggleSidebar, isMobile } = this.props;
-    const { notifications, notificationsCount, notificationsEl, profileEl, dropdownOpen, } = this.state;
+    const { t, i18n, classes, className, isSidebarOpen, onToggleSidebar, isMobile } = this.props;
+    const { notifications, notificationsCount, notificationsEl, profileEl, langEl, dropdownOpen, lang } = this.state;
 
     const rootClassName = classNames(classes.root, className);
     const showNotifications = Boolean(notificationsEl);
     const showProfile = Boolean(profileEl);
+    const showLang = Boolean(langEl)
 
     return (
       <Fragment>
@@ -158,37 +184,34 @@ class Topbar extends Component {
 
             {isMobile ?
               <div className={classes.dropdownContainer}>
-                {/* <ClickAwayListener onClickAway={this.handleClickAway}>
-                  <div>
-                    <Button onClick={this.handleClickDropDown}>Open menu</Button>
-                    {dropdownOpen ? (
-                      <Paper className={classes.dropdown}>
-                        <List component="div" disablePadding>
-                          <ListItem button>
-                            <ListItemIcon>
-                              <StartIcon />
-                            </ListItemIcon>
-                          </ListItem>
-                        </List>
-                      </Paper>
-                    ) : null}
-                  </div>
-                </ClickAwayListener> */}
+                <IconButton
+                  onClick={this.handleShowLanguage}>
+                  <Badge
+                    badgeContent={lang}
+                    color="primary">
+                    <LanguageIcon />
+                  </Badge>
+                </IconButton>
               </div>
               :
               <div className={classes.leftButtons}>
-                <IconButton
-                >
+                <IconButton>
                   <SearchIcon />
                 </IconButton>
                 <IconButton
-                  onClick={this.handleShowNotifications}
-                >
+                  onClick={this.handleShowLanguage}>
+                  <Badge
+                    badgeContent={lang}
+                    color="primary">
+                    <LanguageIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton
+                  onClick={this.handleShowNotifications}>
                   <Badge
                     badgeContent={notificationsCount}
                     color="primary"
-                    variant="dot"
-                  >
+                    variant="dot">
                     <NotificationsIcon />
                   </Badge>
                 </IconButton>
@@ -196,21 +219,6 @@ class Topbar extends Component {
                 >
                   <PersonIcon />
                 </IconButton>
-
-                {/* <Button size="small"
-                  className={classes.profile}
-                  onClick={this.handleShowProfile}>
-                  <Avatar
-                    className={classes.avatar}
-                    src="/images/avatars/avatar_1.png"
-                  />
-                  <span>
-                    Nguyễn Minh Híu
-  </span>
-
-                  <ExpandIcon />
-
-                </Button> */}
               </div>}
 
 
@@ -264,6 +272,28 @@ class Topbar extends Component {
           </Button>
           </div>
         </Popover>
+
+        <Popover open={showLang} anchorEl={langEl}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}>
+          <div>
+            <Paper>
+              <ClickAwayListener onClickAway={this.handleCloseLanguage}>
+                <MenuList>
+                  <MenuItem onClick={() => this.handleChangeLanguage('en')}>English</MenuItem>
+                  <MenuItem onClick={() => this.handleChangeLanguage('vi')}>Tiếng Việt</MenuItem>
+                  <MenuItem onClick={() => this.handleChangeLanguage('ja')}>日本語</MenuItem>
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </div>
+        </Popover>
       </Fragment>
     );
   }
@@ -285,4 +315,4 @@ Topbar.defaultProps = {
 export default compose(
   withRouter,
   withStyles(styles)
-)(Topbar);
+)(withTranslation('default')(Topbar));

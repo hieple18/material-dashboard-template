@@ -2,6 +2,9 @@ const DRAWER_WIDTH = 271;
 const SMALL_DRAWER_WIDTH = 71;
 const TOP_HEIGHT = 64;
 export default theme => ({
+  wrapper: {
+    position: 'relative'
+  },
   topbar: {
     position: 'fixed',
     width: '100%',
@@ -54,5 +57,12 @@ export default theme => ({
   },
   narrowContent: {
     marginLeft: SMALL_DRAWER_WIDTH
+  },
+  speedDial: {
+    position: 'fixed',
+    bottom: theme.spacing(5),
+    right: theme.spacing(6),
+    // '&$directionUp, &$directionLeft': {
+    // },
   },
 });
