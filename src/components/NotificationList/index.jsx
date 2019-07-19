@@ -16,12 +16,14 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Typography
+  Typography,
+  IconButton
 } from '@material-ui/core';
 
 // Material icons
 import {
-  ArrowForwardIos as ArrowForwardIosIcon,
+  Settings as SettingIcon,
+  MoreHoriz as DotsIcon,
   Payment as PaymentIcon,
   PeopleOutlined as PeopleIcon,
   Code as CodeIcon,
@@ -61,13 +63,10 @@ class NotificationList extends Component {
         {notifications.length > 0 ? (
           <Fragment>
             <div className={classes.header}>
-              <Typography variant="h6">User Notifications</Typography>
-              <Typography
-                className={classes.subtitle}
-                variant="body2"
-              >
-                {notifications.length} new notifications
-              </Typography>
+              <Typography variant="h5">Notifications</Typography>
+              <IconButton>
+                <SettingIcon className={classes.arrowForward} />
+              </IconButton>
             </div>
             <div className={classes.content}>
               <List component="div">
@@ -92,7 +91,9 @@ class NotificationList extends Component {
                         primary={notification.title}
                         secondary={notification.when}
                       />
-                      <ArrowForwardIosIcon className={classes.arrowForward} />
+                      <IconButton>
+                        <DotsIcon className={classes.arrowForward} />
+                      </IconButton>
                     </ListItem>
                     <Divider />
                   </Link>
@@ -112,17 +113,17 @@ class NotificationList extends Component {
             </div>
           </Fragment>
         ) : (
-          <div className={classes.empty}>
-            <div className={classes.emptyImageWrapper}>
-              <img
-                alt="Empty list"
-                className={classes.emptyImage}
-                src="/images/empty.png"
-              />
+            <div className={classes.empty}>
+              <div className={classes.emptyImageWrapper}>
+                <img
+                  alt="Empty list"
+                  className={classes.emptyImage}
+                  src="/images/empty.png"
+                />
+              </div>
+              <Typography variant="h4">There's nothing here...</Typography>
             </div>
-            <Typography variant="h4">There's nothing here...</Typography>
-          </div>
-        )}
+          )}
       </div>
     );
   }
@@ -137,7 +138,7 @@ NotificationList.propTypes = {
 
 NotificationList.defaultProps = {
   notifications: [],
-  onSelect: () => {}
+  onSelect: () => { }
 };
 
 export default withStyles(styles)(NotificationList);

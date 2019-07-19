@@ -29,6 +29,7 @@ export default theme => ({
     width: DRAWER_WIDTH,
     flexShrink: 0,
     whiteSpace: 'nowrap',
+    overflowY: 'hidden'
   },
   drawerOpen: {
     width: DRAWER_WIDTH,
@@ -51,17 +52,9 @@ export default theme => ({
   },
   sidebar: {
     width: `calc( ${DRAWER_WIDTH}px - 1px)`,
-    overflowY: 'hidden'
+    overflowY: 'auto'
   },
-  fixedToolbar: {
-    
-    top: 0,
-    left: 0,
-    // right: 'auto',
-    width: 'inherit',
-    position: 'fixed',
-    display: 'flex',
-  },
+
   toolbar: {
     display: 'flex',
     alignItems: 'center',
@@ -106,10 +99,6 @@ export default theme => ({
   profileDivider: {
     marginBottom: theme.spacing(2),
     marginTop: theme.spacing(2)
-  },
-  marginTopList: {
-    marginTop: theme.spacing(8),
-    overflowY: 'scroll'
   },
   listSubheader: {
     color: theme.palette.text.secondary

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router } from 'react-router-dom';
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 // Externals
@@ -31,10 +31,14 @@ Chart.helpers.extend(Chart.elements.Rectangle.prototype, {
 
 export default class App extends Component {
   render() {
+
     return (
       <ThemeProvider theme={theme}>
         <Router history={browserHistory}>
-          <MainRoutes />
+          <Switch>
+            <Route path="/:locale" component={MainRoutes} />
+            <Redirect to="/en" />
+          </Switch>
         </Router>
       </ThemeProvider>
     );

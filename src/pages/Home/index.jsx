@@ -30,10 +30,14 @@ class Home extends Component {
 
         const isMobile = ['xs', 'sm'].includes(this.props.width);
 
+        // Get match property from the context
+        const { match } = this.props;
+
         return (
             <Background width={window.innerWidth} height={window.innerHeight}>
-                <Paper className={classNames(classes.root, 
-                    { [classes.floatingPage]: !isMobile, 
+                <Paper className={classNames(classes.root,
+                    {
+                        [classes.floatingPage]: !isMobile,
                         // [classes.fullPage]: isMobile
                     })}>
                     <Grid container spacing={1}>
@@ -62,7 +66,8 @@ class Home extends Component {
                             <Typography className={classes.mediumText} component="p">
                                 Invest Your Super in the Future
                             </Typography>
-                            <Link to="/dashboard">
+                            {/* TODO: /:locale */}
+                            <Link to={`${match.url}/dashboard`}>
                                 <Button color="primary" variant="dashboard" aria-label="Dashboard" className={classes.fab}>
                                     Go to Dashboard
                                     </Button>

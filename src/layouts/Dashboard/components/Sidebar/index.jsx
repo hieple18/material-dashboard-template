@@ -12,18 +12,18 @@ import { withTranslation } from "react-i18next";
 
 // Material components
 import {
-  Avatar,
   Divider,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
   Collapse,
-  ListSubheader,
-  Typography,
   Drawer,
   IconButton
 } from '@material-ui/core';
+
+// Context
+import RouteContext from 'context/RouteContext'
 
 // Material icons
 import {
@@ -66,12 +66,12 @@ const navMenu = [
     name: 'Products',
     icon: <ShoppingBasketIcon />
   },
-  {
-    id: '4',
-    to: '/dashboard/typography',
-    name: 'Typography',
-    icon: <TextFieldsIcon />
-  },
+  // {
+  //   id: '4',
+  //   to: '/dashboard/typography',
+  //   name: 'Typography',
+  //   icon: <TextFieldsIcon />
+  // },
   {
     id: '5',
     to: '/dashboard/tables',
@@ -84,36 +84,36 @@ const navMenu = [
     name: 'Account',
     icon: <AccountBoxIcon />
   },
-  {
-    id: '7',
-    to: '/dashboard/settings',
-    name: 'Settings',
-    icon: <SettingsIcon />
-  },
-  {
-    id: '8',
-    to: '/dashboard/under-development',
-    name: 'UnderDevelopment',
-    icon: <InfoIcon />
-  },
+  // {
+  //   id: '7',
+  //   to: '/dashboard/settings',
+  //   name: 'Settings',
+  //   icon: <SettingsIcon />
+  // },
+  // {
+  //   id: '8',
+  //   to: '/dashboard/under-development',
+  //   name: 'UnderDevelopment',
+  //   icon: <InfoIcon />
+  // },
   {
     id: '9',
     to: '/dashboard/form',
     name: 'Form',
     icon: <EditIcon />
   },
-  {
-    id: '10',
-    to: '/dashboard/map',
-    name: 'Map',
-    icon: <MapIcon />
-  },
-  {
-    id: '11',
-    to: '/dashboard/blank',
-    name: 'Blank',
-    icon: <HomeIcon />
-  }
+  // {
+  //   id: '10',
+  //   to: '/dashboard/map',
+  //   name: 'Map',
+  //   icon: <MapIcon />
+  // },
+  // {
+  //   id: '11',
+  //   to: '/dashboard/blank',
+  //   name: 'Blank',
+  //   icon: <HomeIcon />
+  // }
 ]
 
 class NestedList extends Component {
@@ -123,7 +123,7 @@ class NestedList extends Component {
   };
 
   render() {
-    const { classes, open, data, t } = this.props;
+    const { classes, open, data, match, t } = this.props;
 
     return (
       <List
@@ -139,7 +139,7 @@ class NestedList extends Component {
                   activeClassName={classes.activeListItem}
                   className={classes.listItem}
                   component={NavLink}
-                  to={item.to ? item.to : ''}>
+                  to={item.to ? (match.url + item.to) : ''}>
                   <ListItemIcon className={classes.listItemIcon}>
                     {item.icon}
                   </ListItemIcon>
@@ -168,7 +168,6 @@ class NestedList extends Component {
                     {this.state[item.name] ? (<ExpandLess className={classNames(classes.listItemText, { [classes.hidden]: !open })} />) : (<ExpandMore className={classNames(classes.listItemText, { [classes.hidden]: !open })} />)}
                   </ListItem>
                   <Collapse
-                    // key={item.id}
                     component="li"
                     in={this.state[item.name]}
                     timeout="auto"
@@ -205,14 +204,17 @@ class NestedList extends Component {
 }
 
 class Sidebar extends Component {
+
+  // A static variable for Route Context
+  static contextType = RouteContext
+
   render() {
     const { classes, className, onClose, open, anchor, isHidden, onToggleSidebar, ...rest } = this.props;
-
-    // const rootClassName = classNames(classes.root, className);
+    const { match } = this.context
 
     return (
       <Drawer
-        anchor={anchor}
+        // anchor={anchor}
         className={classNames(classes.drawer, {
           [classes.drawerOpen]: open,
           [classes.drawerClose]: !open,
@@ -227,36 +229,34 @@ class Sidebar extends Component {
         open={open}
         variant={isHidden ? 'temporary' : 'permanent'}
       >
+      <div className={classes.toolbar}>
+        <div className={classes.logoWrapper}>
+          <Link
+            className={classes.logoLink}
+            to={`${match.url}/dashboard/monitor`}>
+            <img
+              alt="Logo"
+              className={classes.logoImage}
+              src={logo}
+            />
+          </Link>
+        </div>
+
+        <IconButton
+          className={classNames(classes.menuButton, {
+            [classes.hidden]: !open,
+          })}
+          onClick={onToggleSidebar}
+          variant="text"
+        >
+          <CloseIcon />
+        </IconButton>
+      </div>
+
         <div className={classes.sidebar}>
-          <div className={classes.fixedToolbar}>
-            <div className={classes.toolbar}>
-              <div className={classes.logoWrapper}>
-                <Link
-                  className={classes.logoLink}
-                  to="/dashboard/monitor"
-                >
-                  <img
-                    alt="Logo"
-                    className={classes.logoImage}
-                    src={logo}
-                  />
-                </Link>
-              </div>
-            </div>
 
-            <IconButton
-              className={classNames(classes.menuButton, {
-                [classes.hidden]: !open,
-              })}
-              onClick={onToggleSidebar}
-              variant="text"
-            >
-              <CloseIcon />
-            </IconButton>
-          </div>
-
-{/* TODO: scroll only in this list */}
-          <NestedList data={navMenu} classes={classes} open={open} {...rest} />
+          {/* TODO: scroll only in this list */}
+          <NestedList data={navMenu} classes={classes} open={open} match={match} {...rest} />
 
           <Divider className={classes.listDivider} />
           <List component="div"
@@ -265,7 +265,7 @@ class Sidebar extends Component {
               activeClassName={classes.activeListItem}
               className={classes.listItem}
               component={NavLink}
-              to="/dashboard/about"
+              to="/en/dashboard/about"
             >
               <ListItemIcon className={classes.listItemIcon}>
                 <InfoIcon />
@@ -277,6 +277,7 @@ class Sidebar extends Component {
             </ListItem>
           </List>
         </div>
+
       </Drawer>
     );
   }

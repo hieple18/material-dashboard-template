@@ -15,21 +15,15 @@ import {
   Badge,
   IconButton,
   Popover,
-  Popper,
   Toolbar,
   Avatar,
-  Typography,
   Button,
   ClickAwayListener,
-  Paper,
-  Grow,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   MenuItem,
   MenuList
 } from '@material-ui/core';
+
+import avatarUrl from 'assets/images/avata.jpg';
 
 // Material icons
 import {
@@ -45,14 +39,24 @@ import {
 // Shared services
 import { getNotifications } from 'services/notification';
 
-// Custom components
-import { NotificationList } from './components';
-
 // Component styles
 import styles from './styles';
 
+// Custom components
+import { Popover as CustomPopover, NotificationList } from 'components'
+
+// Context
+import RouteContext from 'context/RouteContext'
+
+import { Link } from 'react-router-dom';
+
+import { generateLanguage } from 'common/utils'
+
 class Topbar extends Component {
   signal = true;
+
+  // A static variable for Route Context
+  static contextType = RouteContext
 
   state = {
     notifications: [],
@@ -62,7 +66,6 @@ class Topbar extends Component {
     profileEl: null,
     langEl: null,
     dropdownOpen: false,
-    lang: 'en'
   };
 
   async getNotifications() {
@@ -87,7 +90,6 @@ class Topbar extends Component {
   componentDidMount() {
     this.signal = true;
     this.getNotifications();
-
   }
 
   componentWillUnmount() {
@@ -158,12 +160,14 @@ class Topbar extends Component {
 
   render() {
     const { t, i18n, classes, className, isSidebarOpen, onToggleSidebar, isMobile } = this.props;
-    const { notifications, notificationsCount, notificationsEl, profileEl, langEl, dropdownOpen, lang } = this.state;
+    const { language } = i18n;
+    const { notifications, notificationsCount, notificationsEl, profileEl, langEl, dropdownOpen } = this.state;
 
     const rootClassName = classNames(classes.root, className);
     const showNotifications = Boolean(notificationsEl);
     const showProfile = Boolean(profileEl);
-    const showLang = Boolean(langEl)
+    const showLang = Boolean(langEl);
+    const { location } = this.context
 
     return (
       <Fragment>
@@ -187,7 +191,7 @@ class Topbar extends Component {
                 <IconButton
                   onClick={this.handleShowLanguage}>
                   <Badge
-                    badgeContent={lang}
+                    badgeContent={language}
                     color="primary">
                     <LanguageIcon />
                   </Badge>
@@ -201,7 +205,7 @@ class Topbar extends Component {
                 <IconButton
                   onClick={this.handleShowLanguage}>
                   <Badge
-                    badgeContent={lang}
+                    badgeContent={language}
                     color="primary">
                     <LanguageIcon />
                   </Badge>
@@ -216,64 +220,32 @@ class Topbar extends Component {
                   </Badge>
                 </IconButton>
                 <IconButton
-                >
+                  onClick={this.handleShowProfile}>
                   <PersonIcon />
                 </IconButton>
               </div>}
-
-
-
           </Toolbar>
         </div>
 
-        <Popover
-          anchorEl={notificationsEl}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center'
-          }}
-          onClose={this.handleCloseNotifications}
-          open={showNotifications}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center'
-          }}
-        >
+        <CustomPopover open={showProfile} anchorEl={profileEl}
+          onClose={this.handleCloseProfile} className={classes.profile}>
+          <Fragment>
+            <Avatar
+              className={classes.avatar}
+              src={avatarUrl}
+            >
+            </Avatar>
+          </Fragment>
+        </CustomPopover>
+
+        <CustomPopover open={showNotifications} anchorEl={notificationsEl}
+          onClose={this.handleCloseNotifications}>
           <NotificationList
             notifications={notifications}
             onSelect={this.handleCloseNotifications}
           />
-        </Popover>
-        <Popover
-          anchorEl={profileEl}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          onClose={this.handleCloseProfile}
-          open={showProfile}
-        >
-          <div>
-            <Avatar
-              className={classes.avatar}
-              src="/images/avatars/avatar_1.png"
-            />
-
-            <Button
-              color="primary"
-              variant="outlined"
-              onClick={this.handleSignOut}
-            >
-              Sign Out
-          </Button>
-          </div>
-        </Popover>
-
-        <Popover open={showLang} anchorEl={langEl}
+        </CustomPopover>
+        <CustomPopover open={showLang} anchorEl={langEl}
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'right',
@@ -282,18 +254,20 @@ class Topbar extends Component {
             vertical: 'top',
             horizontal: 'right',
           }}>
-          <div>
-            <Paper>
-              <ClickAwayListener onClickAway={this.handleCloseLanguage}>
-                <MenuList>
-                  <MenuItem onClick={() => this.handleChangeLanguage('en')}>English</MenuItem>
-                  <MenuItem onClick={() => this.handleChangeLanguage('vi')}>Tiếng Việt</MenuItem>
-                  <MenuItem onClick={() => this.handleChangeLanguage('ja')}>日本語</MenuItem>
-                </MenuList>
-              </ClickAwayListener>
-            </Paper>
-          </div>
-        </Popover>
+          <ClickAwayListener onClickAway={this.handleCloseLanguage}>
+            <MenuList>
+              <Link to={generateLanguage("en", location)}>
+                <MenuItem onClick={() => this.handleChangeLanguage('en')} selected={language === 'en'}>English</MenuItem>
+              </Link>
+              <Link to={generateLanguage("vi", location)}>
+                <MenuItem onClick={() => this.handleChangeLanguage('vi')} selected={language === 'vi'}>Tiếng Việt</MenuItem>
+              </Link>
+              <Link to={generateLanguage("ja", location)}>
+                <MenuItem onClick={() => this.handleChangeLanguage('ja')} selected={language === 'ja'}>日本語</MenuItem>
+              </Link>
+            </MenuList>
+          </ClickAwayListener>
+        </CustomPopover>
       </Fragment>
     );
   }

@@ -4,37 +4,54 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 // Pages
 import { DashboardPage, NotFoundPage, HomePage } from 'pages';
 
-export default class MainRoutes extends Component {
-  render() {
-    return (
+import { RouteProvider } from 'context/RouteContext'
+
+import i18n from "i18n";
+const lang = i18n.language;
+
+const changeLanguage = lng => {
+  i18n.changeLanguage(lng);
+};
+
+const MainRoutes = ({ match, location }) => {
+
+  const contextValue = { match, location };
+
+  if (lang != match.params.locale) {
+    changeLanguage(match.params.locale);
+  }
+
+  return (
+    <RouteProvider value={contextValue}>
       <Switch>
-        <Redirect
-          exact
-          from="/home"
-          to="/"
-        />
         <Route
           component={HomePage}
           exact
-          path="/"
+          path={`${match.url}`}
         />
         <Route
           component={DashboardPage}
           exact
-          path="/dashboard/:view"
+          path={`${match.url}/dashboard/:view`}
         />
         <Route
           component={NotFoundPage}
           exact
-          path="/not-found"
+          path={`${match.url}/not-found`}
         />
         <Redirect
           exact
-          from="/dashboard"
-          to="/dashboard/monitor"
+          from="/"
+          to={`${match.url}`}
         />
-        <Redirect to="/not-found" />
+        <Redirect
+          exact
+          from={`${match.url}/dashboard`}
+          to={`${match.url}/dashboard/monitor`}
+        />
       </Switch>
-    );
-  }
+    </RouteProvider>
+  );
 }
+
+export default MainRoutes;

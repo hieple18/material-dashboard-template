@@ -23,13 +23,9 @@ class CustomRater extends Component {
         return (
             <div>
                 <Rater
-                    // onRate={onRate ? onRate : this.onRate(this.props.rating)}
                     {...rest} >
                     {children ? children : <Star />}
                 </Rater>
-                {/* <Typography>
-                    {this.state.rating}
-                </Typography> */}
             </div>
         );
     }

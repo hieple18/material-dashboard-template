@@ -4,16 +4,11 @@ export default theme => ({
     maxWidth: '100%'
   },
   header: {
-    backgroundColor: theme.palette.background.default,
-    backgroundImage: 'url("/images/connected_world.svg")',
-    backgroundPositionX: 'right',
-    backgroundPositionY: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'contain',
-    paddingBottom: '34px',
-    paddingLeft: '20px',
-    paddingRight: '20px',
-    paddingTop: '34px'
+    padding: '4px 8px 0px 16px',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   subtitle: {
     color: theme.palette.text.secondary
