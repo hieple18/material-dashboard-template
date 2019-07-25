@@ -14,13 +14,16 @@ import { Paper } from '@material-ui/core';
 const styles = theme => {
   return {
     root: {
-      borderRadius: '4px'
+      borderRadius: "8px",
+      // boxShadow: "0px 10px 39px 0px rgba(68,0,58, 0.5)",
+      // backgroundColor: "#DA6287",
     },
     squared: {
       borderRadius: 0
     },
     outlined: {
-      border: `1px solid ${theme.palette.border}`
+      border: "none"
+      // border: `1px solid ${theme.palette.border}`
     }
   };
 };

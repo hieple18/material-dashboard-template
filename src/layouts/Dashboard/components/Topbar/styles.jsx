@@ -3,8 +3,12 @@ import { relative } from "path"
 const TOP_HEIGHT = 64
 export default theme => ({
   root: {
-    borderBottom: `1px solid ${theme.palette.border}`,
-    backgroundColor: theme.palette.common.white,
+    // borderBottom: `1px solid ${theme.palette.border}`,
+    boxShadow: '4px 0px 5px 0px rgba(0, 0, 0, 0.3)',
+    // dark theme
+    backgroundColor: '#12161B',
+    // colorful theme
+    // backgroundColor: theme.palette.common.white,
     display: 'flex',
     alignItems: 'center',
     height: TOP_HEIGHT,
@@ -56,7 +60,13 @@ export default theme => ({
     right: 0,
     left: 0,
   },
-  
+  searchField: {
+    border: 'none',
+    '&:hover': {
+      border: 'none',
+      backgroundColor: '#FFF'
+    }
+  },
   wrapper: {
     background: 'transparent',
     '&:before': {

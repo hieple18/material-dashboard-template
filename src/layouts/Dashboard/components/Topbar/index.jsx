@@ -20,7 +20,9 @@ import {
   Button,
   ClickAwayListener,
   MenuItem,
-  MenuList
+  MenuList,
+  TextField, InputAdornment,
+  InputBase
 } from '@material-ui/core';
 
 import avatarUrl from 'assets/images/avata.jpg';
@@ -183,11 +185,24 @@ class Topbar extends Component {
               <MenuIcon />
             </IconButton>
 
-            {/* TODO: search box */}
+            {/* TODO: search function */}
+            {!isMobile && <div style={{
+                            display: 'flex',
+                            alignItems: 'center'
+                          }}>
+                            <SearchIcon style={{margin: 16}}/>
+                            <InputBase
+                              className={classes.margin}
+                              placeholder="Search..."
+                            />
+                          </div>}
             {/* TODO: if isMobile --> leftButtons responsive */}
 
             {isMobile ?
               <div className={classes.dropdownContainer}>
+                <IconButton>
+                  <SearchIcon />
+                </IconButton>
                 <IconButton
                   onClick={this.handleShowLanguage}>
                   <Badge
@@ -199,9 +214,6 @@ class Topbar extends Component {
               </div>
               :
               <div className={classes.leftButtons}>
-                <IconButton>
-                  <SearchIcon />
-                </IconButton>
                 <IconButton
                   onClick={this.handleShowLanguage}>
                   <Badge
@@ -268,7 +280,7 @@ class Topbar extends Component {
             </MenuList>
           </ClickAwayListener>
         </CustomPopover>
-      </Fragment>
+      </Fragment >
     );
   }
 }

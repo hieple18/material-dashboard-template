@@ -138,9 +138,9 @@ class Dashboard extends Component {
             })}
           >
             <div className={classes.breadcrumb}>
-              <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="Breadcrumb">
-                <Typography color="textPrimary">{t('dashboard')}</Typography>
-                <Typography className={classes.breadcrumbText} color="textPrimary">{t(match.params.view)}</Typography>
+              <Breadcrumbs className={classes.breadcrumbText} separator={<NavigateNextIcon fontSize="small" />} aria-label="Breadcrumb">
+                <Typography className={classes.breadcrumbText}>{t('dashboard')}</Typography>
+                <Typography className={classes.breadcrumbPrimaryText}>{t(match.params.view)}</Typography>
               </Breadcrumbs>
             </div>
             <div className={classes.content}>

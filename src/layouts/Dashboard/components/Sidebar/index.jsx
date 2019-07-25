@@ -7,12 +7,11 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 // Material helpers
-import { withStyles } from '@material-ui/core';
+import { withStyles, Typography } from '@material-ui/core';
 import { withTranslation } from "react-i18next";
 
 // Material components
 import {
-  Divider,
   List,
   ListItem,
   ListItemIcon,
@@ -46,7 +45,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 // Component styles
 import styles from './styles';
 
-const navMenu = [
+const dashboardMenu = [
   {
     id: '1',
     name: 'Monitor',
@@ -66,12 +65,6 @@ const navMenu = [
     name: 'Products',
     icon: <ShoppingBasketIcon />
   },
-  // {
-  //   id: '4',
-  //   to: '/dashboard/typography',
-  //   name: 'Typography',
-  //   icon: <TextFieldsIcon />
-  // },
   {
     id: '5',
     to: '/dashboard/tables',
@@ -84,36 +77,21 @@ const navMenu = [
     name: 'Account',
     icon: <AccountBoxIcon />
   },
-  // {
-  //   id: '7',
-  //   to: '/dashboard/settings',
-  //   name: 'Settings',
-  //   icon: <SettingsIcon />
-  // },
-  // {
-  //   id: '8',
-  //   to: '/dashboard/under-development',
-  //   name: 'UnderDevelopment',
-  //   icon: <InfoIcon />
-  // },
   {
     id: '9',
     to: '/dashboard/form',
     name: 'Form',
     icon: <EditIcon />
   },
-  // {
-  //   id: '10',
-  //   to: '/dashboard/map',
-  //   name: 'Map',
-  //   icon: <MapIcon />
-  // },
-  // {
-  //   id: '11',
-  //   to: '/dashboard/blank',
-  //   name: 'Blank',
-  //   icon: <HomeIcon />
-  // }
+]
+
+const moreMenu = [
+  {
+    id: '11',
+    to: '/dashboard/about',
+    name: 'About',
+    icon: <InfoIcon />
+  }
 ]
 
 class NestedList extends Component {
@@ -123,82 +101,87 @@ class NestedList extends Component {
   };
 
   render() {
-    const { classes, open, data, match, t } = this.props;
+    const { classes, open, data, match, title, t } = this.props;
 
     return (
-      <List
-        component="div"
-        disablePadding
-        className={classes.marginTopList}
-      >
-        {data && data.map((item) => {
-          return (
-            <div key={item.id}>
-              {item.subitems == null ?
-                <ListItem
-                  activeClassName={classes.activeListItem}
-                  className={classes.listItem}
-                  component={NavLink}
-                  to={item.to ? (match.url + item.to) : ''}>
-                  <ListItemIcon className={classes.listItemIcon}>
-                    {item.icon}
-                  </ListItemIcon>
-                  {open ? <ListItemText
-                    classes={{ primary: classes.listItemText }}
-                    primary={t(item.name.toLowerCase())}
-                  /> : null}
-                </ListItem> :
-                <div key={item.id}>
+      <div>
+        <div className={classes.listHeader}>
+          {open ? <Typography className={classes.listTitle} variant="span">{t(title)}</Typography> : <div className={classes.listTitleHidden}/>}
+        </div>
+        <List
+          component="div"
+          disablePadding
+          className={classes.marginTopList}
+        >
+          {data && data.map((item) => {
+            return (
+              <div key={item.id}>
+                {item.subitems == null ?
                   <ListItem
                     activeClassName={classes.activeListItem}
                     className={classes.listItem}
-                    button
-                    selected={this.state[item.name]}
-                    onClick={this.handleClick.bind(
-                      this,
-                      item.name
-                    )}>
+                    component={NavLink}
+                    to={item.to ? (match.url + item.to) : ''}>
                     <ListItemIcon className={classes.listItemIcon}>
                       {item.icon}
                     </ListItemIcon>
                     {open ? <ListItemText
                       classes={{ primary: classes.listItemText }}
-                      primary={item.name}
+                      primary={t(item.name.toLowerCase())}
                     /> : null}
-                    {this.state[item.name] ? (<ExpandLess className={classNames(classes.listItemText, { [classes.hidden]: !open })} />) : (<ExpandMore className={classNames(classes.listItemText, { [classes.hidden]: !open })} />)}
-                  </ListItem>
-                  <Collapse
-                    component="li"
-                    in={this.state[item.name]}
-                    timeout="auto"
-                    unmountOnExit
-                  >
-                    <List disablePadding>
-                      {item.subitems.map(
-                        sitem => {
-                          return (
-                            <ListItem
-                              activeClassName={classes.activeListSubItem}
-                              className={classes.listSubItem}
-                              component={NavLink}
-                              to={sitem.to ? sitem.to : ''}>
-                              <ListItemText
-                                classes={{ primary: classes.listItemText }}
-                                primary={sitem.name}
-                              />
-                            </ListItem>
-                          );
-                        }
-                      )}
-                    </List>
-                  </Collapse>
-                </div>
-              }
-            </div>
-          );
-        }
-        )}
-      </List>
+                  </ListItem> :
+                  <div key={item.id}>
+                    <ListItem
+                      activeClassName={classes.activeListItem}
+                      className={classes.listItem}
+                      button
+                      selected={this.state[item.name]}
+                      onClick={this.handleClick.bind(
+                        this,
+                        item.name
+                      )}>
+                      <ListItemIcon className={classes.listItemIcon}>
+                        {item.icon}
+                      </ListItemIcon>
+                      {open ? <ListItemText
+                        classes={{ primary: classes.listItemText }}
+                        primary={item.name}
+                      /> : null}
+                      {this.state[item.name] ? (<ExpandLess className={classNames(classes.listItemText, { [classes.hidden]: !open })} />) : (<ExpandMore className={classNames(classes.listItemText, { [classes.hidden]: !open })} />)}
+                    </ListItem>
+                    <Collapse
+                      component="li"
+                      in={this.state[item.name]}
+                      timeout="auto"
+                      unmountOnExit
+                    >
+                      <List disablePadding>
+                        {item.subitems.map(
+                          sitem => {
+                            return (
+                              <ListItem
+                                activeClassName={classes.activeListSubItem}
+                                className={classes.listSubItem}
+                                component={NavLink}
+                                to={sitem.to ? sitem.to : ''}>
+                                <ListItemText
+                                  classes={{ primary: classes.listItemText }}
+                                  primary={sitem.name}
+                                />
+                              </ListItem>
+                            );
+                          }
+                        )}
+                      </List>
+                    </Collapse>
+                  </div>
+                }
+              </div>
+            );
+          }
+          )}
+        </List>
+      </div>
     );
   }
 }
@@ -229,53 +212,33 @@ class Sidebar extends Component {
         open={open}
         variant={isHidden ? 'temporary' : 'permanent'}
       >
-      <div className={classes.toolbar}>
-        <div className={classes.logoWrapper}>
-          <Link
-            className={classes.logoLink}
-            to={`${match.url}/dashboard/monitor`}>
-            <img
-              alt="Logo"
-              className={classes.logoImage}
-              src={logo}
-            />
-          </Link>
+        <div className={classes.toolbar}>
+          <div className={classes.logoWrapper}>
+            <Link
+              className={classes.logoLink}
+              to={`${match.url}/dashboard/monitor`}>
+              <img
+                alt="Logo"
+                className={classes.logoImage}
+                src={logo}
+              />
+            </Link>
+          </div>
+
+          <IconButton
+            className={classNames(classes.sidebarCollapseButton, {
+              // [classes.hidden]: !open,
+            })}
+            onClick={onToggleSidebar}
+            variant="text"
+          >
+            <CloseIcon />
+          </IconButton>
         </div>
 
-        <IconButton
-          className={classNames(classes.menuButton, {
-            [classes.hidden]: !open,
-          })}
-          onClick={onToggleSidebar}
-          variant="text"
-        >
-          <CloseIcon />
-        </IconButton>
-      </div>
-
         <div className={classes.sidebar}>
-
-          {/* TODO: scroll only in this list */}
-          <NestedList data={navMenu} classes={classes} open={open} match={match} {...rest} />
-
-          <Divider className={classes.listDivider} />
-          <List component="div"
-            disablePadding>
-            <ListItem
-              activeClassName={classes.activeListItem}
-              className={classes.listItem}
-              component={NavLink}
-              to="/en/dashboard/about"
-            >
-              <ListItemIcon className={classes.listItemIcon}>
-                <InfoIcon />
-              </ListItemIcon>
-              {open ? <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary="About"
-              /> : null}
-            </ListItem>
-          </List>
+          <NestedList title={"dashboard"} data={dashboardMenu} classes={classes} open={open} match={match} {...rest} />
+          <NestedList title={"more"} data={moreMenu} classes={classes} open={open} match={match} {...rest} />
         </div>
 
       </Drawer>

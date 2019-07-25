@@ -3,7 +3,7 @@ import image from 'assets/images/lost-01.jpg'
 export default theme => ({
   root: {
     flex: 1,
-    height: '100%',
+    height: '100vh',
     // backgroundColor: theme.palette.common.white,
     // boxShadow: '10px 10px 47px 13px rgba(0,0,0,0.1)',
     padding: theme.spacing(3),
@@ -41,7 +41,8 @@ export default theme => ({
     // paddingBottom: theme.spacing(2),
     // paddingLeft: theme.spacing(4),
     // paddingRight: theme.spacing(4),
-    backgroundColor: '#CD60A1',//theme.palette.warning.main,
+    // backgroundColor: '#CD60A1',//theme.palette.warning.main,
+    backgroundImage: 'linear-gradient(to right bottom, #fa7268, #f66e6f, #f16a75, #eb677b, #e46480, #de6285, #d76189, #cf608d, #c65f91, #bc5f94, #b25f96, #a75f97)',
     color: theme.palette.warning.contrastText,
     '&:hover': {
       backgroundColor: theme.palette.warning.light,

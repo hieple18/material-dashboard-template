@@ -36,7 +36,10 @@ export default theme => ({
     flexGrow: 1,
     marginTop: TOP_HEIGHT,
     paddingTop: theme.spacing(4),
-    backgroundColor: theme.palette.background.default,
+    // dark theme
+    backgroundColor: '#464B53',
+    // colorful theme
+    // backgroundColor: '#FFF',//theme.palette.background.default,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
@@ -44,10 +47,16 @@ export default theme => ({
   },
   breadcrumb: {
     marginLeft: theme.spacing(6),
-    marginRight: theme.spacing(6),
+    marginRight: theme.spacing(6)
   },
   breadcrumbText: {
-    fontWeight: 500
+    // dark theme
+    color: '#C2C7CB'
+  },
+  breadcrumbPrimaryText: {
+    fontWeight: 500,
+    // dark theme
+    color: '#C2C7CB'
   },
   content: {
     padding: theme.spacing(0, 2),
