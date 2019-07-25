@@ -1,46 +1,42 @@
-# Material Dashboard Template
+# **# Material Dashboard Template**
 
-## Table of Contents
+**## Table of Contents**
 
-- [Inspiration](#inspiration)
-- [Quick Start](#quick-start)
-- [Documentation](#documentation)
-- [Design Files](#design-files)
-- [File Structure](#file-structure)
-- [Resources](#resources)
-- [Reporting Issues](#reporting-issues)
-- [Licensing](#licensing)
-- [Contact Us](#contact-us)
+- [Inspiration](~#inspiration~)
+- [Quick Start](~#quick-start~)
+- [Documentation](~#documentation~)
+- [Design Files](~#design-files~)
+- [File Structure](~#file-structure~)
+- [Resources](~#resources~)
+- [Reporting Issues](~#reporting-issues~)
+- [Licensing](~#licensing~)
+- [Contact Us](~#contact-us~)
 
-## Inspiration
+**## Inspiration**
+- [Devias Kit - Admin Dashboard](https://devias.io/products/material-react-dashboard)
+- [The world’s most popular React UI framework - Material-UI](https://material-ui.com/)
+- [DevExtreme React Grid - DevExtreme Reactive Components](https://devexpress.github.io/devextreme-reactive/react/grid/)
+- 
 
-- [Brainalytica - Material React Dashboard Free](https://devias.io/products/material-react-dashboard)
-- [React Material UI](https://material-ui.com/)
-- [RSUITE](https://rsuitejs.com/en/)
-
-## Quick start
-
-- [Download from Github](https://github.com/naeminhye/material-dashboard-template) or clone the repo: `git clone https://github.com/naeminhye/material-dashboard-template.git`
-
+**## Quick start**
+- [Download from Github](~https://github.com/naeminhye/material-dashboard-template~) or clone the repo: `git clone https://github.com/naeminhye/material-dashboard-template.git`
 - Install dependencies: `npm install` or `yarn`
-
 - Start the server: `npm run start` or `yarn start`
-
 - Views are on: `localhost:3000`
 
-## Documentation
+**## Documentation**
+- Explore more available components by using storybook: `npm run storybook` or `yarn run storybook`
 
-<!-- The documentation for the Material Dashboard Template can be found [here]() -->
+<!— The documentation for the Material Dashboard Template can be found [here]() —>
 
-## Design Files
 
-## File Structure
 
-Within the download you'll find the following directories and files:
+**## Design Files**
 
+**## File Structure**
+Within the download you’ll find the following directories and files:
 ```
 material-react-dashboard
-
 ├── .eslintrc
 ├── .gitignore
 ├── .prettierrc
@@ -52,65 +48,93 @@ material-react-dashboard
 ├── public
 ├── docs
 └── src
-	├── assets
-	│	└── scss
-	├── common
-	│	├── colors
-	│	├── validators
-	│	└── serviceWorker.js
-	├── components
-	│	├── DisplayMode
-	│	├── Paper
-	│	├── Portlet
-	│	├── PortletContent
-	│	├── PortletFooter
-	│	├── PortletHeader
-	│	├── DisplayMode
-	│	├── PortletLabel
-	│	├── PortletToolbar
-	│	├── SearchInput
-	│	├── Status
-	│	└── SearchInput
-	├── data
-	├── helpers
-	├── icons
-	│	├── Facebook
-	│	└── Google
-	├── layouts
-	│	├── Dashboard
-	│	│	└── components
-	│	│		├── Footer
-	│	│		├── Sidebar
-	│	│		└── Topbar
-	├── services
-	│	├── notification
-	│	├── order
-	│	├── product
-	│	├── user
-	├── theme
-	│	├── overrides
-	│	├── pallete.js
-	│	└── typography.js
-	├── views
-	│	├── Account
-	│	├── Dashboard
-	│	├── Icons
-	│	├── NotFound
-	│	├── ProductList
-	│	├── Settings
-	│	├── SignIn
-	│	├── SignUp
-	│	├── Typography
-	│	├── UnderDevelopment
-	│	└── UserList
-	├── App.jsx
-	└── index.jsx
+├── assets
+│		└── scss
+├── common
+│		├── colors
+│		├── validators
+│		└── serviceWorker.js
+├── components
+│		├── DisplayMode
+│		├── Paper
+│		├── Portlet
+│		├── PortletContent
+│		├── PortletFooter
+│		├── PortletHeader
+│		├── DisplayMode
+│		├── PortletLabel
+│		├── PortletToolbar
+│		├── SearchInput
+│		├── Status
+│		└── SearchInput
+├── context
+│		└──
+├── data
+├── helpers
+├── i18n
+├── icons
+│		├── Facebook
+│		└── Google
+│
+├── layouts
+│		└── Dashboard
+│		 		├── components
+│		 		├── Footer
+│		 		├── Sidebar
+│		 		└── Topbar
+│
+├── pages
+│		├── Dashboard
+│		├── Home
+│		├── Login
+│		└── NotFound
+│
+├── routes
+│		├── DashboardRoutes
+│		│		└── index.jsx
+│		├── MainRoutes
+│		│		└── index.jsx
+│		└── index.jsx
+│
+├── services
+│		├── notification
+│		├── order
+│		├── product
+│		└── user
+│
+├── theme
+│		├── overrides
+│		├── pallete.js
+│		└── typography.js
+│
+├── views
+│		├── Account
+│		├── Blank
+│		├── Form
+│		├── Map
+│		├── NotFound
+│		├── ProductList
+│		├── Tables
+│		├── Settings
+│		├── Typography
+│		├── UnderDevelopment
+│		└── UserList
+│
+├── App.jsx
+└── index.jsx
 ```
 
-## Resources
+**## TODO list:**
+- [x] Dashboard Layout
+- [x] Use React Router Dom
+- [x] Multilanguage
+- [ ]  Pagination
+- [ ] Use Redux
 
-## Reporting Issues:
+**## Resources**
 
-## Design Files
+**## Reporting Issues**
 
-## Contact Us
+**## Contact Us**
+
+#material dashboard# 

@@ -3,19 +3,20 @@ import image from 'assets/images/lost-01.jpg'
 export default theme => ({
   root: {
     flex: 1,
-    backgroundColor: theme.palette.common.white,
-    boxShadow: '10px 10px 47px 13px rgba(0,0,0,0.1)',
+    height: '100%',
+    // backgroundColor: theme.palette.common.white,
+    // boxShadow: '10px 10px 47px 13px rgba(0,0,0,0.1)',
     padding: theme.spacing(3),
     backgroundImage: `url(${image})`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
   },
   floatingPage: { 
-    position: 'absolute', 
-    left: '50%', top: '50%',
-    transform: 'translate(-50%, -50%)',
-    minHeight: '70%',
-    minWidth: '70%',
+    // position: 'absolute', 
+    // left: '50%', top: '50%',
+    // transform: 'translate(-50%, -50%)',
+    // minHeight: '70%',
+    // minWidth: '70%',
     // borderRadius: '5px',
   },
   fullPage: {

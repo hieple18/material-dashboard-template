@@ -25,19 +25,12 @@ import {
     TableRowDetail
 } from '@devexpress/dx-react-grid-material-ui';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import {
-    SearchOutlined as SearchIcon,
-    AttachFileOutlined as AttachFileIcon
-} from '@material-ui/icons'
 
 import { Loading } from 'components'
 
 // Externals
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
-// import { Loading } from '../../../theme-sources/material-ui/components/loading';
-// import { CurrencyTypeProvider } from '../../../theme-sources/material-ui/components/currency-type-provider';
 
 const URL = 'https://js.devexpress.com/Demos/WidgetsGallery/data/orderItems';
 
@@ -48,7 +41,8 @@ const styles = theme => ({
         padding: '16px',
         margin: '16px',
         boxShadow: "none",
-        position: 'relative'
+        position: 'relative',
+        border: '1px solid #DFE3E8'
     },
     searchPanel: {
         '&:before': {
@@ -63,19 +57,6 @@ const styles = theme => ({
     headerText: {
         fontWeight: 500
     },
-    gender: {
-        borderRadius: 12,
-        borderWidth: 1,
-        borderStyle: 'solid',
-        padding: '4px 8px',
-        fontSize: 10,
-    },
-    status: {
-        borderRadius: 12,
-        padding: '4px 8px',
-        fontSize: 10,
-        color: '#FFF'
-    }
 });
 
 
@@ -91,83 +72,6 @@ const detailContainerStyles = theme => ({
         paddingTop: theme.spacing(3.5),
     },
 });
-
-const getColor = (gender) => {
-    if (gender === "Female") {
-        return '#FA9693';
-    }
-    return '#04DE93';
-};
-
-const getStatusColor = (status) => {
-    let color = '#00bfff';
-    switch (status) {
-        case "Accepted":
-            color = '#00b500';
-            break;
-        case "Rejected":
-            color = '#ff4000';
-            break;
-        case "Read":
-            color = '#ffbf00';
-            break;
-        case "New":
-        default:
-            color = '#00bfff';
-            break;
-
-    }
-    return color;
-};
-
-const GenderFormatter = withStyles(styles)(
-    ({ value, classes }) =>
-        <span className={classes.gender} style={{ borderColor: getColor(value), color: getColor(value) }}>{value}</span>
-);
-
-const GenderTypeProvider =
-    (props) => (
-        <DataTypeProvider
-            formatterComponent={GenderFormatter}
-            {...props}
-        />
-    );
-
-const StatusFormatter = withStyles(styles)(
-    ({ value, classes }) =>
-        <span className={classes.status} style={{ backgroundColor: getStatusColor(value) }}>{value}</span>
-);
-
-const StatusTypeProvider =
-    (props) => (
-        <DataTypeProvider
-            formatterComponent={StatusFormatter}
-            {...props}
-        />
-    );
-
-
-
-const AttachmentFormatter = withStyles(styles)(
-    ({ value, classes }) => {
-        return (
-            value ?
-                <Link href={value} target="_blank">
-                    <IconButton size="small" variant="text">
-                        < AttachFileIcon style={{ fontSize: 18 }} />
-                    </IconButton >
-                </Link> : null
-        )
-    }
-);
-
-const AttachmentTypeProvider =
-    (props) => (
-        <DataTypeProvider
-            formatterComponent={AttachmentFormatter}
-            {...props}
-        />
-    );
 
 const gridDetailContainerBase = () => ({ row, classes }) => {
     return (
@@ -197,9 +101,6 @@ class DataGrid extends Component {
             loading: false,
             selection: this.props.options.selection || [],
             searchValue: '',
-            genderColumns: this.props.options.genderColumns,
-            attachmentColumns: this.props.options.attachmentColumns,
-            statusColumns: this.props.options.statusColumns
         };
 
         this.changeSorting = this.changeSorting.bind(this);
@@ -257,15 +158,16 @@ class DataGrid extends Component {
         overrides: {
             MUIDataTable: {
                 paper: {
-                    padding: '16px',
-                    margin: '16px',
+                    padding: 16,
+                    margin: 16,
                     boxShadow: "none",
-                    borderRadius: '20px',
+                    borderRadius: 20,
+                    border: '1px solid #DFE3E8'
                 }
             },
             MUIDataTableSelectCell: {
                 headerCell: {
-                    backgroundColor: '#FCFBFC',
+                    backgroundColor: '#eaeaea',
                     borderTop: '1px solid rgba(224, 224, 224, 1)'
                 }
             },
@@ -274,7 +176,7 @@ class DataGrid extends Component {
                     height: 'unset',
                 },
                 fixedHeader: {
-                    backgroundColor: '#FCFBFC',
+                    backgroundColor: '#eaeaea',
                     // borderTop: '1px solid rgba(224, 224, 224, 1)',
                     // borderBottom: '1px solid rgba(224, 224, 224, 1)',
                 }
@@ -295,7 +197,7 @@ class DataGrid extends Component {
             },
             MuiTableRow: {
                 head: {
-                    backgroundColor: '#FCFBFC',
+                    backgroundColor: '#eaeaea',
                     borderTop: '1px solid rgba(224, 224, 224, 1)',
                     fontSize: '14px',
                     fontWeight: '600',
@@ -305,7 +207,7 @@ class DataGrid extends Component {
                 root: {
                     cursor: 'pointer',
                     '&:hover': {
-                        backgroundColor: '#FCFBFC',
+                        backgroundColor: '#eaeaea',
 
                     },
                     '&$selected': {
@@ -315,7 +217,7 @@ class DataGrid extends Component {
             },
             MuiTableCell: {
                 root: {
-                    fontSize: 16,
+                    fontSize: 14,
                     borderBottom: 'none'
                 }
             },
@@ -383,9 +285,6 @@ class DataGrid extends Component {
 
     render() {
         const {
-            genderColumns,
-            attachmentColumns,
-            statusColumns,
             tableColumnExtensions,
             sorting,
             pageSize,
@@ -396,7 +295,7 @@ class DataGrid extends Component {
             selection,
             searchValue
         } = this.state;
-        const { classes, data, columns, title, className, options } = this.props
+        const { classes, data, columns, title, className, options, dataTypes } = this.props
 
         return (
             <MuiThemeProvider theme={this.getMuiTheme()}>
@@ -431,13 +330,17 @@ class DataGrid extends Component {
                         {options.selectable &&
                             <IntegratedSelection />}
                         <IntegratedPaging />
-                        {genderColumns && <GenderTypeProvider for={genderColumns} />}
-                        {attachmentColumns && <AttachmentTypeProvider for={attachmentColumns} />}
-                        {statusColumns && <StatusTypeProvider for={statusColumns} />}
-
-                        {/* <RowDetailState
-                            defaultExpandedRowIds={[1]}/> */}
-
+                        
+                        {dataTypes && dataTypes.map((type) => {
+                            return(
+                                <DataTypeProvider
+                                    for={type.targetColumns}
+                                    formatterComponent={type.formatterComponent}
+                                    editorComponent={type.editorComponent}
+                                    availableFilterOperations={type.availableFilterOperations}
+                            />
+                            )
+                        })}
                         <CustomPaging
                             totalCount={totalCount}
                         />
@@ -445,7 +348,6 @@ class DataGrid extends Component {
                             columnExtensions={tableColumnExtensions}
                         />
                         <TableHeaderRow showSortingControls />
-
 
                         {/* <TableRowDetail
                             contentComponent={gridDetailContainer()} /> */}
@@ -475,6 +377,12 @@ DataGrid.propTypes = {
     //     pageSizes: PropTypes.arrayOf(PropTypes.number),
     //     selectable: PropTypes.bool
     // })),
+    dataTypes: PropTypes.objectOf(PropTypes.shape({
+        targetColumns: PropTypes.arrayOf(PropTypes.string).isRequired ,
+        formatterComponent: PropTypes.node,
+        editorComponent: PropTypes.node,
+        availableFilterOperations: PropTypes.node
+    })),
 };
 
 DataGrid.defaultProps = {

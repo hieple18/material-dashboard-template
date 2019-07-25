@@ -7,9 +7,17 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core';
 
 // Material components
-import { Grid, Typography } from '@material-ui/core';
+import {
+  Grid, Typography,
+  IconButton,
+  Link
+} from '@material-ui/core';
 import MUIDataTable from "mui-datatables";
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import {
+  SearchOutlined as SearchIcon,
+  AttachFileOutlined as AttachFileIcon
+} from '@material-ui/icons'
 
 import {
   Table,
@@ -30,8 +38,49 @@ const styles = theme => ({
     marginTop: '50px',
     maxWidth: '100%',
     width: '554px'
+  },
+  gender: {
+      borderRadius: 12,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      padding: '4px 8px',
+      fontSize: 10,
+  },
+  status: {
+      borderRadius: 12,
+      padding: '4px 8px',
+      fontSize: 10,
+      color: '#FFF'
   }
 });
+
+const getColor = (gender) => {
+    if (gender === "Female") {
+        return '#FA9693';
+    }
+    return '#04DE93';
+};
+
+const getStatusColor = (status) => {
+    let color = '#00bfff';
+    switch (status) {
+        case "Accepted":
+            color = '#00b500';
+            break;
+        case "Rejected":
+            color = '#ff4000';
+            break;
+        case "Read":
+            color = '#ffbf00';
+            break;
+        case "New":
+        default:
+            color = '#00bfff';
+            break;
+
+    }
+    return color;
+};
 
 class Tables extends Component {
 
@@ -41,7 +90,6 @@ class Tables extends Component {
       { name: "Name", title: "Name" },
       { name: "Gender", title: "Gender" },
       { name: "Email", title: "Email" },
-      { name: "Address", title: "Address" },
       { name: "Position", title: "Position" },
       { name: "Attachment", title: "Attachment" },
       { name: "Status", title: "Status" },
@@ -63,7 +111,7 @@ class Tables extends Component {
         "Gender": "Male",
         "Status": "Accepted",
         "Address": "Stalhille",
-        "Position": "PHP Programmer", 
+        "Position": "PHP Programmer",
         "Attachment": "https://www.cbs.dk/files/cbs.dk/cv_template_sheet_en.pdf"
       },
       {
@@ -80,7 +128,7 @@ class Tables extends Component {
         "Gender": "Male",
         "Status": "New",
         "Address": "Noorderwijk",
-        "Position": "Tester", 
+        "Position": "Tester",
         "Attachment": "https://www.cbs.dk/files/cbs.dk/cv_template_sheet_en.pdf"
       },
       {
@@ -137,7 +185,7 @@ class Tables extends Component {
         "Gender": "Female",
         "Status": "Rejected",
         "Address": "Dendermonde",
-        "Position": "Tester", 
+        "Position": "Tester",
         "Attachment": "https://www.cbs.dk/files/cbs.dk/cv_template_sheet_en.pdf"
       },
       {
@@ -146,7 +194,7 @@ class Tables extends Component {
         "Gender": "Male",
         "Status": "Rejected",
         "Address": "Stamford",
-        "Position": "Designer", 
+        "Position": "Designer",
         "Attachment": "https://www.cbs.dk/files/cbs.dk/cv_template_sheet_en.pdf"
       },
       {
@@ -163,7 +211,7 @@ class Tables extends Component {
         "Gender": "Female",
         "Status": "Rejected",
         "Address": "Sloten",
-        "Position": "Velit Associates"
+        "Position": "Java Developer"
       }
     ]
 
@@ -178,6 +226,43 @@ class Tables extends Component {
       attachmentColumns: ['Attachment'],
       statusColumns: ['Status']
     };
+    const dataTypes = [
+      {
+        targetColumns: ['Attachment'],
+        formatterComponent: withStyles(styles)(
+          ({ value, classes }) => {
+            return (
+              value ?
+                <Link href={value} target="_blank">
+                  <IconButton size="small" variant="text">
+                    < AttachFileIcon style={{ fontSize: 18 }} />
+                  </IconButton >
+                </Link> : null
+            )
+          }
+        ),
+        editorComponent: null,
+        availableFilterOperations: null
+      },
+      {
+        targetColumns: ['Gender'],
+        formatterComponent: withStyles(styles)(
+          ({ value, classes }) =>
+            <span className={classes.gender} style={{ borderColor: getColor(value), color: getColor(value) }}>{value}</span>
+        ),
+        editorComponent: null,
+        availableFilterOperations: null
+      },
+      {
+        targetColumns: ['Status'],
+        formatterComponent: withStyles(styles)(
+          ({ value, classes }) =>
+              <span className={classes.status} style={{ backgroundColor: getStatusColor(value) }}>{value}</span>
+      ),
+      editorComponent: null,
+      availableFilterOperations: null
+      }
+    ]
 
     return (
       <div>
@@ -186,6 +271,7 @@ class Tables extends Component {
           data={data}
           columns={columns}
           options={options}
+          dataTypes={dataTypes}
         />
       </div>
     );

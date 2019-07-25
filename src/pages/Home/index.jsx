@@ -34,49 +34,53 @@ class Home extends Component {
         const { match } = this.props;
 
         return (
-            <Background width={window.innerWidth} height={window.innerHeight}>
-                <Paper className={classNames(classes.root,
-                    {
-                        [classes.floatingPage]: !isMobile,
-                        // [classes.fullPage]: isMobile
-                    })}>
-                    <Grid container spacing={1}>
-                        <Grid item xs={12} className={classes.menuBar}>
-                            <div className={classes.menu}>
-                                <Button size="large" className={classes.menuButton}>
-                                    Docs
+            // <Paper className={classNames(classes.root,
+            //     {
+            //         [classes.floatingPage]: !isMobile,
+            //         // [classes.fullPage]: isMobile
+            //     })}>
+            <div className={classNames(classes.root,
+                {
+                    [classes.floatingPage]: !isMobile,
+                    // [classes.fullPage]: isMobile
+                })}>
+                <Grid container spacing={1}>
+                    <Grid item xs={12} className={classes.menuBar}>
+                        <div className={classes.menu}>
+                            <Button size="large" className={classes.menuButton}>
+                                Docs
                                     </Button>
-                                <Button size="large" className={classes.menuButton}>
-                                    About
+                            <Button size="large" className={classes.menuButton}>
+                                About
                                     </Button>
-                                <ButtonGroup size="large" aria-label="Outlined button group">
-                                    <Button>
-                                        Sign Up
+                            <ButtonGroup size="large" aria-label="Outlined button group">
+                                <Button>
+                                    Sign Up
                                     </Button>
-                                    <Button className={classes.filledBg}>
-                                        Log In
+                                <Button className={classes.filledBg}>
+                                    Log In
                                     </Button>
-                                </ButtonGroup>
-                            </div>
-                        </Grid>
-                        <Grid item xs={12} className={classes.leftContainer}>
-                            <Typography className={classes.bigText} component="p">
-                                Spaceship
-                            </Typography>
-                            <Typography className={classes.mediumText} component="p">
-                                Invest Your Super in the Future
-                            </Typography>
-                            {/* TODO: /:locale */}
-                            <Link to={`${match.url}/dashboard`}>
-                                <Button color="primary" variant="dashboard" aria-label="Dashboard" className={classes.fab}>
-                                    Go to Dashboard
-                                    </Button>
-                            </Link>
-
-                        </Grid>
+                            </ButtonGroup>
+                        </div>
                     </Grid>
-                </Paper>
-            </Background>
+                    <Grid item xs={12} className={classes.leftContainer}>
+                        <Typography className={classes.bigText} component="p">
+                            Spaceship
+                            </Typography>
+                        <Typography className={classes.mediumText} component="p">
+                            Invest Your Super in the Future
+                            </Typography>
+                        {/* TODO: /:locale */}
+                        <Link to={`${match.url}/dashboard`}>
+                            <Button color="primary" variant="dashboard" aria-label="Dashboard" className={classes.fab}>
+                                Go to Dashboard
+                                    </Button>
+                        </Link>
+
+                    </Grid>
+                </Grid>
+                </div>
+            //</Paper> 
         );
     }
 }
